@@ -10,7 +10,8 @@ const T = {
   de: {
     meta: {
       title: "Nutzungsbedingungen | TradeLens",
-      description: "Allgemeine Geschäftsbedingungen der TradeLens iOS App von Citran Digital.",
+      description:
+        "Allgemeine Geschäftsbedingungen der TradeLens iOS App von Citran Digital.",
     },
     breadcrumb: "Nutzungsbedingungen",
     eyebrow: "Rechtliches",
@@ -91,7 +92,8 @@ const T = {
   en: {
     meta: {
       title: "Terms of Use | TradeLens",
-      description: "Terms and Conditions of the TradeLens iOS App by Citran Digital.",
+      description:
+        "Terms and Conditions of the TradeLens iOS App by Citran Digital.",
     },
     breadcrumb: "Terms of Use",
     eyebrow: "Legal",
@@ -101,7 +103,8 @@ const T = {
     backLink: "← Back to TradeLens",
     copyright: (y: number) => `© ${y} Citran Digital. All rights reserved.`,
     privacyLink: "TradeLens Privacy Policy →",
-    contactIntro: "For any questions regarding these Terms, please contact us at:",
+    contactIntro:
+      "For any questions regarding these Terms, please contact us at:",
     sections: [
       {
         heading: "1. Scope and Subject Matter",
@@ -197,14 +200,20 @@ export default async function TermsOfUsePage({
   return (
     <div
       style={{
-        fontFamily: "var(--font-plus-jakarta, 'Plus Jakarta Sans', system-ui, sans-serif)",
+        fontFamily:
+          "var(--font-plus-jakarta, 'Plus Jakarta Sans', system-ui, sans-serif)",
         background: "#010101",
         color: "#ffffff",
         minHeight: "100vh",
       }}
     >
       {/* Minimal nav */}
-      <header style={{ borderBottom: "1px solid rgba(255,255,255,0.08)", padding: "0 24px" }}>
+      <header
+        style={{
+          borderBottom: "1px solid rgba(255,255,255,0.08)",
+          padding: "0 24px",
+        }}
+      >
         <div
           style={{
             maxWidth: 900,
@@ -216,7 +225,12 @@ export default async function TermsOfUsePage({
         >
           <Link
             href={`/${locale}/tradelens`}
-            style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 10,
+              textDecoration: "none",
+            }}
             aria-label="TradeLens"
           >
             <div
@@ -228,9 +242,21 @@ export default async function TermsOfUsePage({
                 boxShadow: "0 0 0 1px rgba(255,255,255,0.1)",
               }}
             >
-              <Image src="/tradelens.png" alt="TradeLens" width={34} height={34} />
+              <Image
+                src="/tradelens.png"
+                alt="TradeLens"
+                width={34}
+                height={34}
+              />
             </div>
-            <span style={{ fontSize: 17, fontWeight: 800, color: "#fff", letterSpacing: "-0.03em" }}>
+            <span
+              style={{
+                fontSize: 17,
+                fontWeight: 800,
+                color: "#fff",
+                letterSpacing: "-0.03em",
+              }}
+            >
               TradeLens
             </span>
           </Link>
@@ -249,8 +275,9 @@ export default async function TermsOfUsePage({
       </header>
 
       {/* Document */}
-      <main style={{ maxWidth: 720, margin: "0 auto", padding: "72px 24px 120px" }}>
-
+      <main
+        style={{ maxWidth: 720, margin: "0 auto", padding: "72px 24px 120px" }}
+      >
         {/* Page header */}
         <div
           style={{
@@ -283,33 +310,65 @@ export default async function TermsOfUsePage({
           >
             {t.pageTitle}
           </h1>
-          <p style={{ fontSize: 15, color: "#7f7f7f", margin: "0 0 4px" }}>{t.provider}</p>
+          <p style={{ fontSize: 15, color: "#7f7f7f", margin: "0 0 4px" }}>
+            {t.provider}
+          </p>
           <p style={{ fontSize: 14, color: "#7f7f7f", margin: 0 }}>{t.date}</p>
         </div>
 
         {/* Sections */}
         <div style={{ display: "flex", flexDirection: "column", gap: 40 }}>
           {t.sections.map((section) => {
-            const isContact = "contactSection" in section && section.contactSection;
-            const isPrivacy = "privacySection" in section && section.privacySection;
+            const isContact =
+              "contactSection" in section && section.contactSection;
+            const isPrivacy =
+              "privacySection" in section && section.privacySection;
             const callout = "callout" in section ? section.callout : null;
 
             if (isContact) {
               return (
                 <div
                   key={section.heading}
-                  style={{ paddingTop: 8, borderTop: "1px solid rgba(255,255,255,0.08)" }}
+                  style={{
+                    paddingTop: 8,
+                    borderTop: "1px solid rgba(255,255,255,0.08)",
+                  }}
                 >
-                  <h2 style={{ fontSize: 17, fontWeight: 700, color: "#ffffff", letterSpacing: "-0.02em", marginBottom: 14 }}>
+                  <h2
+                    style={{
+                      fontSize: 17,
+                      fontWeight: 700,
+                      color: "#ffffff",
+                      letterSpacing: "-0.02em",
+                      marginBottom: 14,
+                    }}
+                  >
                     {section.heading}
                   </h2>
-                  <p style={{ fontSize: 15, color: "#b6b6b6", lineHeight: 1.75, marginBottom: 16 }}>
+                  <p
+                    style={{
+                      fontSize: 15,
+                      color: "#b6b6b6",
+                      lineHeight: 1.75,
+                      marginBottom: 16,
+                    }}
+                  >
                     {section.body}
                   </p>
-                  <p style={{ fontSize: 15, color: "#b6b6b6", lineHeight: 1.75, margin: 0 }}>
+                  <p
+                    style={{
+                      fontSize: 15,
+                      color: "#b6b6b6",
+                      lineHeight: 1.75,
+                      margin: 0,
+                    }}
+                  >
                     Daniele Citran
                     <br />
-                    <a href="mailto:contact@citran.digital" style={{ color: "#3B82F6", textDecoration: "none" }}>
+                    <a
+                      href="mailto:contact@citran.digital"
+                      style={{ color: "#3B82F6", textDecoration: "none" }}
+                    >
                       contact@citran.digital
                     </a>
                   </p>
@@ -328,7 +387,11 @@ export default async function TermsOfUsePage({
                     {section.body}{" "}
                     <Link
                       href={`/${locale}/tradelens/privacy-policy`}
-                      style={{ color: "#3B82F6", textDecoration: "none", fontWeight: 500 }}
+                      style={{
+                        color: "#3B82F6",
+                        textDecoration: "none",
+                        fontWeight: 500,
+                      }}
                     >
                       {t.privacyLink}
                     </Link>
@@ -375,7 +438,13 @@ export default async function TermsOfUsePage({
 }
 
 // ─── Doc section ──────────────────────────────────────────────────────────────
-function DocSection({ heading, children }: { heading: string; children: React.ReactNode }) {
+function DocSection({
+  heading,
+  children,
+}: {
+  heading: string;
+  children: React.ReactNode;
+}) {
   return (
     <div>
       <h2
@@ -389,13 +458,23 @@ function DocSection({ heading, children }: { heading: string; children: React.Re
       >
         {heading}
       </h2>
-      <div style={{ fontSize: 15, color: "#b6b6b6", lineHeight: 1.75 }}>{children}</div>
+      <div style={{ fontSize: 15, color: "#b6b6b6", lineHeight: 1.75 }}>
+        {children}
+      </div>
     </div>
   );
 }
 
 // ─── Callout highlight ────────────────────────────────────────────────────────
-function Callout({ variant, badge, children }: { variant: "warning" | "info"; badge: string; children: React.ReactNode }) {
+function Callout({
+  variant,
+  badge,
+  children,
+}: {
+  variant: "warning" | "info";
+  badge: string;
+  children: React.ReactNode;
+}) {
   const warn = variant === "warning";
   return (
     <div
@@ -423,7 +502,11 @@ function Callout({ variant, badge, children }: { variant: "warning" | "info"; ba
       >
         {badge}
       </span>
-      <p style={{ fontSize: 15, color: "#b6b6b6", lineHeight: 1.75, margin: 0 }}>{children}</p>
+      <p
+        style={{ fontSize: 15, color: "#b6b6b6", lineHeight: 1.75, margin: 0 }}
+      >
+        {children}
+      </p>
     </div>
   );
 }

@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useInView } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
+import { createContext, useContext, useRef, useEffect, useState, useSyncExternalStore } from "react";
 import type { Locale } from "@/lib/i18n";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -52,6 +52,7 @@ const T = {
             "Erhalte einen vollständigen Trading-Plan mit Entry-Points, Stop-Loss und Risikobewertung.",
         },
       ],
+      stepLabel: (n: number) => `Schritt ${n}`,
     },
     features: {
       eyebrow: "Funktionen",
@@ -161,6 +162,7 @@ const T = {
             "Get a complete trading plan with entry points, stop-loss and risk assessment.",
         },
       ],
+      stepLabel: (n: number) => `Step ${n}`,
     },
     features: {
       eyebrow: "Features",
@@ -233,6 +235,43 @@ const T = {
   },
 } as const;
 
+// ─── Mobile / touch: avoid heavy blur + infinite motion (Safari iOS) ─────────
+const TradeLensMotionLiteContext = createContext(false);
+
+function subscribeTradeLensMotionLite(onStoreChange: () => void) {
+  if (typeof window === "undefined") return () => {};
+  const mqTouch = window.matchMedia("(hover: none)");
+  const mqNarrow = window.matchMedia("(max-width: 768px)");
+  const fire = () => onStoreChange();
+  mqTouch.addEventListener("change", fire);
+  mqNarrow.addEventListener("change", fire);
+  return () => {
+    mqTouch.removeEventListener("change", fire);
+    mqNarrow.removeEventListener("change", fire);
+  };
+}
+
+function getTradeLensMotionLiteSnapshot(): boolean {
+  if (typeof window === "undefined") return false;
+  return (
+    window.matchMedia("(hover: none)").matches || window.matchMedia("(max-width: 768px)").matches
+  );
+}
+
+function useTradeLensMotionLiteFlag(): boolean {
+  const prefersReduced = useReducedMotion();
+  const mediaLite = useSyncExternalStore(
+    subscribeTradeLensMotionLite,
+    getTradeLensMotionLiteSnapshot,
+    () => false
+  );
+  return Boolean(prefersReduced || mediaLite);
+}
+
+function useTradeLensMotionLite(): boolean {
+  return useContext(TradeLensMotionLiteContext);
+}
+
 // ─── Shared: Fade-in-up on scroll ─────────────────────────────────────────────
 function FadeUp({
   children,
@@ -245,12 +284,17 @@ function FadeUp({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+  const lite = useTradeLensMotionLite();
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 32 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay }}
+      initial={lite ? { opacity: 0 } : { opacity: 0, y: 32 }}
+      animate={inView ? (lite ? { opacity: 1 } : { opacity: 1, y: 0 }) : {}}
+      transition={
+        lite
+          ? { duration: 0.35, ease: [0.22, 1, 0.36, 1], delay }
+          : { duration: 0.65, ease: [0.22, 1, 0.36, 1], delay }
+      }
       className={className}
     >
       {children}
@@ -283,12 +327,13 @@ function CountUp({ target, duration = 2200 }: { target: number; duration?: numbe
 // ─── Apple App Store Badge ────────────────────────────────────────────────────
 function AppStoreBadge({ large = false, locale }: { large?: boolean; locale: Locale }) {
   const t = T[locale].appStore;
+  const lite = useTradeLensMotionLite();
   return (
     <motion.a
       href="https://apps.apple.com/app/tradelens-chart-analyse/id6753321240"
       aria-label="TradeLens im App Store herunterladen"
-      whileHover={{ scale: 1.03, boxShadow: "0 0 28px rgba(59,130,246,0.45)" }}
-      whileTap={{ scale: 0.97 }}
+      whileHover={lite ? undefined : { scale: 1.03, boxShadow: "0 0 28px rgba(59,130,246,0.45)" }}
+      whileTap={lite ? { scale: 0.98 } : { scale: 0.97 }}
       style={{
         display: "inline-flex",
         alignItems: "center",
@@ -406,6 +451,7 @@ const FEATURE_ICONS = [ICONS.barChart, ICONS.newspaper, ICONS.chat, ICONS.arrowU
 function TLNav({ locale }: { locale: Locale }) {
   const t = T[locale].nav;
   const [scrolled, setScrolled] = useState(false);
+  const lite = useTradeLensMotionLite();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 24);
@@ -419,9 +465,16 @@ function TLNav({ locale }: { locale: Locale }) {
         position: "sticky",
         top: 0,
         zIndex: 50,
-        backdropFilter: "blur(20px)",
-        WebkitBackdropFilter: "blur(20px)",
-        background: scrolled ? "rgba(1,1,1,0.92)" : "rgba(1,1,1,0.55)",
+        ...(lite
+          ? {}
+          : { backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)" }),
+        background: lite
+          ? scrolled
+            ? "rgba(1,1,1,0.98)"
+            : "rgba(1,1,1,0.96)"
+          : scrolled
+            ? "rgba(1,1,1,0.92)"
+            : "rgba(1,1,1,0.55)",
         borderBottom: `1px solid ${scrolled ? "rgba(255,255,255,0.08)" : "transparent"}`,
         transition: "background 0.35s ease, border-color 0.35s ease",
       }}
@@ -479,9 +532,6 @@ function TLNav({ locale }: { locale: Locale }) {
           >
             {t.features}
           </a>
-          <div style={{ marginLeft: 8 }}>
-            <AppStoreBadge locale={locale} />
-          </div>
         </nav>
       </div>
     </header>
@@ -491,44 +541,81 @@ function TLNav({ locale }: { locale: Locale }) {
 // ─── HERO SECTION ─────────────────────────────────────────────────────────────
 function TLHero({ locale }: { locale: Locale }) {
   const t = T[locale].hero;
+  const lite = useTradeLensMotionLite();
 
   return (
     <section
       style={{ position: "relative", overflow: "hidden", padding: "100px 24px 80px", textAlign: "center" }}
     >
-      <motion.div
-        animate={{ y: [0, -22, 0] }}
-        transition={{ duration: 7, ease: "easeInOut", repeat: Infinity }}
-        style={{
-          position: "absolute",
-          top: "40%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: 800,
-          height: 600,
-          borderRadius: "50%",
-          background: "radial-gradient(ellipse at center, rgba(59,130,246,0.18) 0%, rgba(99,102,241,0.09) 35%, transparent 70%)",
-          filter: "blur(60px)",
-          pointerEvents: "none",
-          zIndex: 0,
-        }}
-      />
-      <motion.div
-        animate={{ y: [0, 16, 0] }}
-        transition={{ duration: 9, ease: "easeInOut", repeat: Infinity, delay: 1.5 }}
-        style={{
-          position: "absolute",
-          top: "20%",
-          right: "10%",
-          width: 300,
-          height: 300,
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%)",
-          filter: "blur(40px)",
-          pointerEvents: "none",
-          zIndex: 0,
-        }}
-      />
+      {lite ? (
+        <>
+          <div
+            style={{
+              position: "absolute",
+              top: "40%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "min(100vw, 800px)",
+              height: 480,
+              borderRadius: "50%",
+              background:
+                "radial-gradient(ellipse at center, rgba(59,130,246,0.14) 0%, rgba(99,102,241,0.06) 45%, transparent 72%)",
+              pointerEvents: "none",
+              zIndex: 0,
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              top: "18%",
+              right: "8%",
+              width: 240,
+              height: 240,
+              borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%)",
+              pointerEvents: "none",
+              zIndex: 0,
+            }}
+          />
+        </>
+      ) : (
+        <>
+          <motion.div
+            animate={{ y: [0, -22, 0] }}
+            transition={{ duration: 7, ease: "easeInOut", repeat: Infinity }}
+            style={{
+              position: "absolute",
+              top: "40%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: 800,
+              height: 600,
+              borderRadius: "50%",
+              background:
+                "radial-gradient(ellipse at center, rgba(59,130,246,0.18) 0%, rgba(99,102,241,0.09) 35%, transparent 70%)",
+              filter: "blur(60px)",
+              pointerEvents: "none",
+              zIndex: 0,
+            }}
+          />
+          <motion.div
+            animate={{ y: [0, 16, 0] }}
+            transition={{ duration: 9, ease: "easeInOut", repeat: Infinity, delay: 1.5 }}
+            style={{
+              position: "absolute",
+              top: "20%",
+              right: "10%",
+              width: 300,
+              height: 300,
+              borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%)",
+              filter: "blur(40px)",
+              pointerEvents: "none",
+              zIndex: 0,
+            }}
+          />
+        </>
+      )}
 
       <div style={{ position: "relative", zIndex: 1, maxWidth: 820, margin: "0 auto" }}>
         <FadeUp>
@@ -605,8 +692,10 @@ function TLHero({ locale }: { locale: Locale }) {
           <div className="flex flex-wrap justify-center gap-4 mt-16">
             {/* Card 1: Signal */}
             <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 4.5, ease: "easeInOut", repeat: Infinity }}
+              animate={lite ? false : { y: [0, -10, 0] }}
+              transition={
+                lite ? undefined : { duration: 4.5, ease: "easeInOut", repeat: Infinity }
+              }
               style={{
                 background: "#131313",
                 border: "1px solid rgba(255,255,255,0.08)",
@@ -646,8 +735,12 @@ function TLHero({ locale }: { locale: Locale }) {
 
             {/* Card 2: Trading plan */}
             <motion.div
-              animate={{ y: [0, -14, 0] }}
-              transition={{ duration: 5.5, ease: "easeInOut", repeat: Infinity, delay: 0.4 }}
+              animate={lite ? false : { y: [0, -14, 0] }}
+              transition={
+                lite
+                  ? undefined
+                  : { duration: 5.5, ease: "easeInOut", repeat: Infinity, delay: 0.4 }
+              }
               style={{
                 background: "#0f0f0f",
                 border: "1px solid rgba(59,130,246,0.25)",
@@ -678,8 +771,10 @@ function TLHero({ locale }: { locale: Locale }) {
 
             {/* Card 3: News */}
             <motion.div
-              animate={{ y: [0, -9, 0] }}
-              transition={{ duration: 4, ease: "easeInOut", repeat: Infinity, delay: 0.8 }}
+              animate={lite ? false : { y: [0, -9, 0] }}
+              transition={
+                lite ? undefined : { duration: 4, ease: "easeInOut", repeat: Infinity, delay: 0.8 }
+              }
               style={{
                 background: "#131313",
                 border: "1px solid rgba(255,255,255,0.08)",
@@ -742,6 +837,7 @@ function TLHero({ locale }: { locale: Locale }) {
 // ─── HOW IT WORKS ─────────────────────────────────────────────────────────────
 function TLHowItWorks({ locale }: { locale: Locale }) {
   const t = T[locale].howItWorks;
+  const lite = useTradeLensMotionLite();
 
   return (
     <section id="how-it-works" style={{ padding: "100px 24px", background: "#010101" }}>
@@ -777,7 +873,9 @@ function TLHowItWorks({ locale }: { locale: Locale }) {
           {t.steps.map((step, i) => (
             <FadeUp key={step.title} delay={i * 0.12}>
               <motion.div
-                whileHover={{ scale: 1.02, borderColor: "rgba(59,130,246,0.3)" }}
+                whileHover={
+                  lite ? undefined : { scale: 1.02, borderColor: "rgba(59,130,246,0.3)" }
+                }
                 transition={{ duration: 0.3 }}
                 style={{
                   background: "#131313",
@@ -793,11 +891,11 @@ function TLHowItWorks({ locale }: { locale: Locale }) {
                     fontSize: 13,
                     fontWeight: 800,
                     color: "#3B82F6",
-                    letterSpacing: "0.06em",
+                    letterSpacing: "0.02em",
                     marginBottom: 20,
                   }}
                 >
-                  {String(i + 1).padStart(2, "0")}
+                  {t.stepLabel(i + 1)}
                 </div>
                 <IconBox>{STEP_ICONS[i]}</IconBox>
                 <h3
@@ -826,6 +924,7 @@ function TLHowItWorks({ locale }: { locale: Locale }) {
 // ─── FEATURES SECTION ─────────────────────────────────────────────────────────
 function TLFeatures({ locale }: { locale: Locale }) {
   const t = T[locale].features;
+  const lite = useTradeLensMotionLite();
 
   return (
     <section id="features" style={{ padding: "100px 24px", background: "#0a0a0a" }}>
@@ -864,11 +963,16 @@ function TLFeatures({ locale }: { locale: Locale }) {
           {t.items.map((feat, i) => (
             <FadeUp key={feat.title} delay={i * 0.1}>
               <motion.div
-                whileHover={{
-                  scale: 1.02,
-                  borderColor: "rgba(59,130,246,0.3)",
-                  boxShadow: "0 8px 40px rgba(0,0,0,0.5), 0 0 20px rgba(59,130,246,0.08)",
-                }}
+                whileHover={
+                  lite
+                    ? undefined
+                    : {
+                        scale: 1.02,
+                        borderColor: "rgba(59,130,246,0.3)",
+                        boxShadow:
+                          "0 8px 40px rgba(0,0,0,0.5), 0 0 20px rgba(59,130,246,0.08)",
+                      }
+                }
                 transition={{ duration: 0.3 }}
                 style={{
                   background: "#131313",
@@ -978,6 +1082,7 @@ function TLValueProps({ locale }: { locale: Locale }) {
 // ─── DOWNLOAD CTA ─────────────────────────────────────────────────────────────
 function TLDownloadCTA({ locale }: { locale: Locale }) {
   const t = T[locale].cta;
+  const lite = useTradeLensMotionLite();
 
   return (
     <section
@@ -989,35 +1094,69 @@ function TLDownloadCTA({ locale }: { locale: Locale }) {
         background: "#010101",
       }}
     >
-      <div
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: 700,
-          height: 500,
-          borderRadius: "50%",
-          background: "radial-gradient(ellipse, rgba(59,130,246,0.2) 0%, rgba(29,78,216,0.1) 40%, transparent 70%)",
-          filter: "blur(80px)",
-          pointerEvents: "none",
-        }}
-      />
-      <motion.div
-        animate={{ scale: [1, 1.08, 1] }}
-        transition={{ duration: 8, ease: "easeInOut", repeat: Infinity }}
-        style={{
-          position: "absolute",
-          top: "30%",
-          left: "20%",
-          width: 200,
-          height: 200,
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%)",
-          filter: "blur(30px)",
-          pointerEvents: "none",
-        }}
-      />
+      {lite ? (
+        <>
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "min(100vw, 640px)",
+              height: 420,
+              borderRadius: "50%",
+              background:
+                "radial-gradient(ellipse, rgba(59,130,246,0.12) 0%, rgba(29,78,216,0.06) 45%, transparent 72%)",
+              pointerEvents: "none",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              top: "28%",
+              left: "15%",
+              width: 180,
+              height: 180,
+              borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%)",
+              pointerEvents: "none",
+            }}
+          />
+        </>
+      ) : (
+        <>
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: 700,
+              height: 500,
+              borderRadius: "50%",
+              background:
+                "radial-gradient(ellipse, rgba(59,130,246,0.2) 0%, rgba(29,78,216,0.1) 40%, transparent 70%)",
+              filter: "blur(80px)",
+              pointerEvents: "none",
+            }}
+          />
+          <motion.div
+            animate={{ scale: [1, 1.08, 1] }}
+            transition={{ duration: 8, ease: "easeInOut", repeat: Infinity }}
+            style={{
+              position: "absolute",
+              top: "30%",
+              left: "20%",
+              width: 200,
+              height: 200,
+              borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%)",
+              filter: "blur(30px)",
+              pointerEvents: "none",
+            }}
+          />
+        </>
+      )}
 
       <div style={{ position: "relative", zIndex: 1, maxWidth: 700, margin: "0 auto" }}>
         <FadeUp>
@@ -1077,6 +1216,7 @@ function TLDownloadCTA({ locale }: { locale: Locale }) {
 function TLFooter({ locale }: { locale: Locale }) {
   const t = T[locale].footer;
   const year = new Date().getFullYear();
+  const lite = useTradeLensMotionLite();
 
   return (
     <footer
@@ -1125,7 +1265,7 @@ function TLFooter({ locale }: { locale: Locale }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={t.ariaTikTok}
-                whileHover={{ scale: 1.1 }}
+                whileHover={lite ? undefined : { scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 style={{
                   width: 44,
@@ -1156,7 +1296,7 @@ function TLFooter({ locale }: { locale: Locale }) {
               <motion.a
                 href="mailto:help@citran.digital"
                 aria-label={t.ariaEmail}
-                whileHover={{ scale: 1.1 }}
+                whileHover={lite ? undefined : { scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 style={{
                   width: 44,
@@ -1265,25 +1405,29 @@ function TLFooter({ locale }: { locale: Locale }) {
 
 // ─── MAIN EXPORT ──────────────────────────────────────────────────────────────
 export function TradeLensPage({ locale }: Props) {
+  const motionLite = useTradeLensMotionLiteFlag();
+
   return (
-    <div
-      style={{
-        fontFamily: "var(--font-plus-jakarta, 'Plus Jakarta Sans', system-ui, sans-serif)",
-        background: "#010101",
-        color: "#ffffff",
-        minHeight: "100vh",
-        overflowX: "hidden",
-      }}
-    >
-      <TLNav locale={locale} />
-      <main>
-        <TLHero locale={locale} />
-        <TLHowItWorks locale={locale} />
-        <TLFeatures locale={locale} />
-        <TLValueProps locale={locale} />
-        <TLDownloadCTA locale={locale} />
-      </main>
-      <TLFooter locale={locale} />
-    </div>
+    <TradeLensMotionLiteContext.Provider value={motionLite}>
+      <div
+        style={{
+          fontFamily: "var(--font-plus-jakarta, 'Plus Jakarta Sans', system-ui, sans-serif)",
+          background: "#010101",
+          color: "#ffffff",
+          minHeight: "100vh",
+          overflowX: "hidden",
+        }}
+      >
+        <TLNav locale={locale} />
+        <main>
+          <TLHero locale={locale} />
+          <TLHowItWorks locale={locale} />
+          <TLFeatures locale={locale} />
+          <TLValueProps locale={locale} />
+          <TLDownloadCTA locale={locale} />
+        </main>
+        <TLFooter locale={locale} />
+      </div>
+    </TradeLensMotionLiteContext.Provider>
   );
 }
