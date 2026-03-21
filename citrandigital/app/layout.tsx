@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Geist_Mono, Instrument_Sans, Plus_Jakarta_Sans } from "next/font/google";
 import { headers } from "next/headers";
 
@@ -60,6 +61,7 @@ export default async function RootLayout({
         className={`${instrumentSans.className} min-h-full flex flex-col antialiased`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
