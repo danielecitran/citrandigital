@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import * as React from "react";
 
+import { BackgroundPaths } from "@/components/ui/background-paths";
 import { getDictionary } from "@/lib/get-dictionary";
 import { isLocale, type Locale } from "@/lib/i18n";
 
@@ -13,26 +15,26 @@ export async function generateMetadata({
   const locale: Locale = raw;
   const dict = await getDictionary(locale);
   return {
-    title: dict.meta.projekte.title,
-    description: dict.meta.projekte.description,
+    title: dict.meta.home.title,
+    description: dict.meta.home.description,
   };
 }
 
-export default async function ProjektePage({
+export default async function HomePage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale: raw } = await params;
   if (!isLocale(raw)) return null;
-  const dict = await getDictionary(raw);
+  const locale: Locale = raw;
+  const dict = await getDictionary(locale);
 
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-4 px-6 py-16">
-      <h1 className="text-3xl font-semibold tracking-tight">
-        {dict.projekte.heading}
-      </h1>
-      <p className="text-muted-foreground">{dict.projekte.lead}</p>
-    </main>
+    <BackgroundPaths
+      title={dict.home.title}
+      ctaLabel={dict.home.cta}
+      ctaHref="#"
+    />
   );
 }

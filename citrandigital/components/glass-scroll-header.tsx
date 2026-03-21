@@ -48,14 +48,15 @@ export function GlassScrollHeader({
       )}
     >
       <nav className="flex h-14 w-full items-center justify-between px-2 md:h-12 md:px-1 md:transition-all md:ease-out">
-        <Link href={logoHref} aria-label="Startseite">
+        <Link href={logoHref} aria-label={homeAriaLabel}>
           <Image
-            src="/placeholder.png"
+            src="/banner.svg"
             alt=""
-            width={120}
-            height={28}
-            className="h-6 w-auto"
+            width={450}
+            height={105}
+            className="h-11 w-auto md:h-10"
             priority
+            unoptimized
           />
         </Link>
         <Link href={projectsHref} className={projectsLinkClass}>
