@@ -18,7 +18,7 @@ const T = {
       howItWorks: "Wie es funktioniert",
       features: "Features",
       ariaLabel: "Hauptnavigation",
-      ariaHome: "TradeLens – Zurück zur Startseite",
+      ariaHome: "TradeLens – Zurück zur TradeLens-Seite",
     },
     hero: {
       badge: "KI-gestützte Chart Analysen",
@@ -128,7 +128,7 @@ const T = {
       howItWorks: "How it works",
       features: "Features",
       ariaLabel: "Main navigation",
-      ariaHome: "TradeLens – Back to home",
+      ariaHome: "TradeLens – Back to the TradeLens page",
     },
     hero: {
       badge: "AI-powered Chart Analysis",
@@ -270,6 +270,20 @@ function useTradeLensMotionLiteFlag(): boolean {
 
 function useTradeLensMotionLite(): boolean {
   return useContext(TradeLensMotionLiteContext);
+}
+
+/** Sticky TLNav (~72px) + etwas Luft, damit Überschriften nicht unter der Bar landen */
+const TL_NAV_ANCHOR_OFFSET_PX = 88;
+
+function scrollToTradeLensSection(
+  elementId: string,
+  behavior: ScrollBehavior = "smooth"
+): void {
+  const el = document.getElementById(elementId);
+  if (!el) return;
+  const top =
+    el.getBoundingClientRect().top + window.scrollY - TL_NAV_ANCHOR_OFFSET_PX;
+  window.scrollTo({ top: Math.max(0, top), behavior });
 }
 
 // ─── Shared: Fade-in-up on scroll ─────────────────────────────────────────────
@@ -452,6 +466,17 @@ function TLNav({ locale }: { locale: Locale }) {
   const t = T[locale].nav;
   const [scrolled, setScrolled] = useState(false);
   const lite = useTradeLensMotionLite();
+  const prefersReducedMotion = useReducedMotion();
+
+  const handleInPageAnchor = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    sectionId: string
+  ) => {
+    e.preventDefault();
+    const behavior: ScrollBehavior = prefersReducedMotion ? "auto" : "smooth";
+    scrollToTradeLensSection(sectionId, behavior);
+    window.history.replaceState(null, "", `#${sectionId}`);
+  };
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 24);
@@ -491,7 +516,7 @@ function TLNav({ locale }: { locale: Locale }) {
         }}
       >
         <Link
-          href={`/${locale}`}
+          href={`/${locale}/tradelens`}
           style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none" }}
           aria-label={t.ariaHome}
         >
@@ -522,12 +547,14 @@ function TLNav({ locale }: { locale: Locale }) {
         <nav style={{ display: "flex", alignItems: "center", gap: 4 }} aria-label={t.ariaLabel}>
           <a
             href="#how-it-works"
+            onClick={(e) => handleInPageAnchor(e, "how-it-works")}
             className="hidden md:inline-flex items-center text-[#b6b6b6] hover:text-white text-sm font-medium px-3.5 py-2 rounded-lg transition-colors duration-200"
           >
             {t.howItWorks}
           </a>
           <a
             href="#features"
+            onClick={(e) => handleInPageAnchor(e, "features")}
             className="hidden md:inline-flex items-center text-[#b6b6b6] hover:text-white text-sm font-medium px-3.5 py-2 rounded-lg transition-colors duration-200"
           >
             {t.features}
@@ -1406,6 +1433,21 @@ function TLFooter({ locale }: { locale: Locale }) {
 // ─── MAIN EXPORT ──────────────────────────────────────────────────────────────
 export function TradeLensPage({ locale }: Props) {
   const motionLite = useTradeLensMotionLiteFlag();
+
+  useEffect(() => {
+    const hash = window.location.hash.replace(/^#/, "");
+    if (!hash) return;
+    const el = document.getElementById(hash);
+    if (!el) return;
+    const reduce =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const behavior: ScrollBehavior = reduce ? "auto" : "smooth";
+    const id = requestAnimationFrame(() => {
+      scrollToTradeLensSection(hash, behavior);
+    });
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   return (
     <TradeLensMotionLiteContext.Provider value={motionLite}>

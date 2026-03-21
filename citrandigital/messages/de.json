@@ -16,6 +16,10 @@
     "tradelens": {
       "title": "TradeLens: Chart Analyse | Jetzt herunterladen",
       "description": "Tradelens."
+    },
+    "notFound": {
+      "title": "Seite nicht gefunden | Citran Digital Solutions",
+      "description": "Die angeforderte Seite existiert nicht oder wurde verschoben."
     }
   },
   "nav": {
@@ -41,5 +45,12 @@
   "projekte": {
     "heading": "Projekte",
     "lead": "Hier kannst du deine Projekteübersicht einbauen."
+  },
+  "notFound": {
+    "hint": "Fehler",
+    "heading": "Seite nicht gefunden",
+    "body": "Diese Adresse führt nirgendwohin oder der Inhalt wurde verschoben. Über die Startseite findest du wieder zurück.",
+    "ctaHome": "Zur Startseite",
+    "ctaTradelens": "TradeLens"
   }
 }
