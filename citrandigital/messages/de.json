@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "siteName": "Citran Digital Solutions",
+    "home": {
+      "title": "Citran Digital Solutions | Wir entwickeln Mobile-Apps und webbasierte SaaS-Anwendungen.",
+      "description": "Citran Digital Solutions – Mobile-Apps und webbasierte SaaS-Anwendungen."
+    },
+    "impressum": {
+      "title": "Impressum | Citran Digital Solutions",
+      "description": "Impressum und Kontaktangaben."
+    },
+    "projekte": {
+      "title": "Projekte | Citran Digital Solutions",
+      "description": "Projekte und Referenzen von Citran Digital Solutions."
+    }
+  },
+  "nav": {
+    "homeAria": "Startseite",
+    "projects": "Projekte"
+  },
+  "footer": {
+    "brandTitle": "Citran Digital Solutions",
+    "brandTagline": "Wir entwickeln Mobile-Apps und webbasierte SaaS-Anwendungen.",
+    "legalHeading": "Rechtliches",
+    "legalNavAria": "Rechtliches",
+    "impressum": "Impressum",
+    "contactHeading": "Kontakt",
+    "copyright": "© {year} Citran Digital Solutions. Alle Rechte vorbehalten."
+  },
+  "home": {
+    "title": "Citran Digital Solutions",
+    "cta": "Unsere Projekte"
+  },
+  "impressum": {
+    "heading": "Impressum"
+  },
+  "projekte": {
+    "heading": "Projekte",
+    "lead": "Hier kannst du deine Projekteübersicht einbauen."
+  }
+}

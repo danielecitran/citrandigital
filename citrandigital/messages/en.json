@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "siteName": "Citran Digital Solutions",
+    "home": {
+      "title": "Citran Digital Solutions | We build mobile apps and web-based SaaS products.",
+      "description": "Citran Digital Solutions – mobile apps and web-based SaaS applications."
+    },
+    "impressum": {
+      "title": "Legal notice | Citran Digital Solutions",
+      "description": "Legal notice and contact details."
+    },
+    "projekte": {
+      "title": "Projects | Citran Digital Solutions",
+      "description": "Projects and references from Citran Digital Solutions."
+    }
+  },
+  "nav": {
+    "homeAria": "Home",
+    "projects": "Projects"
+  },
+  "footer": {
+    "brandTitle": "Citran Digital Solutions",
+    "brandTagline": "We build mobile apps and web-based SaaS applications.",
+    "legalHeading": "Legal",
+    "legalNavAria": "Legal",
+    "impressum": "Legal notice",
+    "contactHeading": "Contact",
+    "copyright": "© {year} Citran Digital Solutions. All rights reserved."
+  },
+  "home": {
+    "title": "Citran Digital Solutions",
+    "cta": "Our projects"
+  },
+  "impressum": {
+    "heading": "Legal notice"
+  },
+  "projekte": {
+    "heading": "Projects",
+    "lead": "Add your project overview here."
+  }
+}
