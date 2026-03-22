@@ -119,6 +119,7 @@ const T = {
       contactHeading: "Kontakt",
       copyright: (year: number) => `© ${year} Citran Digital. Alle Rechte vorbehalten.`,
       ariaTikTok: "TradeLens auf TikTok",
+      ariaInstagram: "TradeLens auf Instagram",
       ariaEmail: "TradeLens per E-Mail kontaktieren",
       ariaLegal: "Rechtliche Links",
     },
@@ -229,6 +230,7 @@ const T = {
       contactHeading: "Contact",
       copyright: (year: number) => `© ${year} Citran Digital. All rights reserved.`,
       ariaTikTok: "TradeLens on TikTok",
+      ariaInstagram: "TradeLens on Instagram",
       ariaEmail: "Contact TradeLens by email",
       ariaLegal: "Legal links",
     },
@@ -1318,6 +1320,41 @@ function TLFooter({ locale }: { locale: Locale }) {
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.77 1.52V6.77a4.85 4.85 0 0 1-1-.08z" />
+                </svg>
+              </motion.a>
+              <motion.a
+                href="https://www.instagram.com/tradelens_en"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t.ariaInstagram}
+                whileHover={lite ? undefined : { scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                style={{
+                  width: 44,
+                  height: 44,
+                  borderRadius: 12,
+                  background: "rgba(255,255,255,0.05)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#b6b6b6",
+                  textDecoration: "none",
+                  transition: "background 0.2s, border-color 0.2s",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.background = "rgba(59,130,246,0.1)";
+                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(59,130,246,0.3)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
+                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.08)";
+                }}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
                 </svg>
               </motion.a>
               <motion.a

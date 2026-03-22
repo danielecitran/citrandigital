@@ -13,7 +13,7 @@ function localeFromPathname(pathname: string): Locale | null {
   return null;
 }
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const pathnameLocale = localeFromPathname(pathname);
