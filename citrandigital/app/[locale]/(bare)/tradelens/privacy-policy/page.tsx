@@ -10,7 +10,8 @@ const UI = {
   de: {
     meta: {
       title: "Datenschutzerklärung | TradeLens",
-      description: "Datenschutzerklärung der TradeLens iOS App von Citran Digital.",
+      description:
+        "Datenschutzerklärung der TradeLens iOS App von Citran Digital.",
     },
     breadcrumb: "Datenschutzerklärung",
     eyebrow: "Rechtliches",
@@ -61,14 +62,20 @@ export default async function PrivacyPolicyPage({
   return (
     <div
       style={{
-        fontFamily: "var(--font-plus-jakarta, 'Plus Jakarta Sans', system-ui, sans-serif)",
+        fontFamily:
+          "var(--font-plus-jakarta, 'Plus Jakarta Sans', system-ui, sans-serif)",
         background: "#010101",
         color: "#ffffff",
         minHeight: "100vh",
       }}
     >
       {/* Minimal nav */}
-      <header style={{ borderBottom: "1px solid rgba(255,255,255,0.08)", padding: "0 24px" }}>
+      <header
+        style={{
+          borderBottom: "1px solid rgba(255,255,255,0.08)",
+          padding: "0 24px",
+        }}
+      >
         <div
           style={{
             maxWidth: 900,
@@ -80,7 +87,12 @@ export default async function PrivacyPolicyPage({
         >
           <Link
             href={`/${locale}/tradelens`}
-            style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 10,
+              textDecoration: "none",
+            }}
             aria-label="TradeLens"
           >
             <div
@@ -92,9 +104,21 @@ export default async function PrivacyPolicyPage({
                 boxShadow: "0 0 0 1px rgba(255,255,255,0.1)",
               }}
             >
-              <Image src="/tradelens.png" alt="TradeLens" width={34} height={34} />
+              <Image
+                src="/tradelens.png"
+                alt="TradeLens"
+                width={34}
+                height={34}
+              />
             </div>
-            <span style={{ fontSize: 17, fontWeight: 800, color: "#fff", letterSpacing: "-0.03em" }}>
+            <span
+              style={{
+                fontSize: 17,
+                fontWeight: 800,
+                color: "#fff",
+                letterSpacing: "-0.03em",
+              }}
+            >
               TradeLens
             </span>
           </Link>
@@ -113,8 +137,9 @@ export default async function PrivacyPolicyPage({
       </header>
 
       {/* Document */}
-      <main style={{ maxWidth: 720, margin: "0 auto", padding: "72px 24px 120px" }}>
-
+      <main
+        style={{ maxWidth: 720, margin: "0 auto", padding: "72px 24px 120px" }}
+      >
         {/* Page header */}
         <div
           style={{
@@ -147,7 +172,9 @@ export default async function PrivacyPolicyPage({
           >
             {ui.pageTitle}
           </h1>
-          <p style={{ fontSize: 15, color: "#7f7f7f", margin: "0 0 4px" }}>{ui.provider}</p>
+          <p style={{ fontSize: 15, color: "#7f7f7f", margin: "0 0 4px" }}>
+            {ui.provider}
+          </p>
           <p style={{ fontSize: 14, color: "#7f7f7f", margin: 0 }}>{ui.date}</p>
         </div>
 
@@ -194,10 +221,11 @@ function DeContent() {
   return (
     <>
       <DocSection heading="1. Verantwortlicher">
-        Verantwortlich für die Datenbearbeitung im Sinne des Schweizer Datenschutzgesetzes (DSG) ist:
+        Verantwortlich für die Datenbearbeitung im Sinne des Schweizer
+        Datenschutzgesetzes (DSG) ist:
         <AddressBlock
           lines={[
-            "Citran Digital",
+            "Daniele Citran",
             "Pfruendhofstrasse 54",
             "8910 Affoltern am Albis",
             "Schweiz",
@@ -207,7 +235,8 @@ function DeContent() {
       </DocSection>
 
       <DocSection heading="2. Erhebung und Bearbeitung personenbezogener Daten">
-        Wir bearbeiten personenbezogene Daten nur im erforderlichen Umfang. Dazu gehören:
+        Wir bearbeiten personenbezogene Daten nur im erforderlichen Umfang. Dazu
+        gehören:
         <BulletList
           items={[
             "Direkt erhobene Daten (z. B. E-Mail-Adresse bei Support-Anfragen oder Kontoerstellung)",
@@ -216,8 +245,10 @@ function DeContent() {
             "Bilddaten, die der Analyse von Trading-Charts dienen",
           ]}
         />
-        Diese Daten dienen der Bereitstellung, Verbesserung und Absicherung unserer Dienste.
-        <br /><br />
+        Diese Daten dienen der Bereitstellung, Verbesserung und Absicherung
+        unserer Dienste.
+        <br />
+        <br />
         Die Speicherung erfolgt sowohl:
         <BulletList
           items={[
@@ -228,13 +259,18 @@ function DeContent() {
       </DocSection>
 
       <DocSection heading="3. Analyse- und Trackingtools">
-        Zur Nutzungsanalyse setzen wir ggf. Dienste wie Google Analytics oder Firebase Analytics ein.
-        Dabei werden Informationen über Ihr Nutzerverhalten pseudonymisiert gespeichert.
-        <br /><br />
-        Die Bearbeitung erfolgt nur mit Ihrer ausdrücklichen Einwilligung. Diese Einwilligung kann
-        jederzeit mit Wirkung für die Zukunft widerrufen werden.
-        <br /><br />
-        Weitere Informationen: Google Ireland Ltd., Gordon House, Barrow Street, Dublin 4, Irland
+        Zur Nutzungsanalyse setzen wir ggf. Dienste wie Google Analytics oder
+        Firebase Analytics ein. Dabei werden Informationen über Ihr
+        Nutzerverhalten pseudonymisiert gespeichert.
+        <br />
+        <br />
+        Die Bearbeitung erfolgt nur mit Ihrer ausdrücklichen Einwilligung. Diese
+        Einwilligung kann jederzeit mit Wirkung für die Zukunft widerrufen
+        werden.
+        <br />
+        <br />
+        Weitere Informationen: Google Ireland Ltd., Gordon House, Barrow Street,
+        Dublin 4, Irland
         <br />
         Datenschutzerklärung:{" "}
         <a
@@ -275,11 +311,13 @@ function DeContent() {
           rows={[
             {
               label: "Zweck",
-              value: "Analyse von Chartbildern und Verbesserung der KI-Modelle (nur mit Einwilligung)",
+              value:
+                "Analyse von Chartbildern und Verbesserung der KI-Modelle (nur mit Einwilligung)",
             },
             {
               label: "Art der Daten",
-              value: "Screenshots/Fotos von Charts (keine direkte Identifizierung möglich)",
+              value:
+                "Screenshots/Fotos von Charts (keine direkte Identifizierung möglich)",
             },
             {
               label: "Hinweis",
@@ -301,23 +339,26 @@ function DeContent() {
             "Meta (Marketingoptimierung)",
           ]}
         />
-        Einige dieser Anbieter befinden sich ausserhalb der Schweiz bzw. EU. Die Datenübermittlung
-        erfolgt nur unter Sicherstellung eines angemessenen Datenschutzniveaus.
+        Einige dieser Anbieter befinden sich ausserhalb der Schweiz bzw. EU. Die
+        Datenübermittlung erfolgt nur unter Sicherstellung eines angemessenen
+        Datenschutzniveaus.
       </DocSection>
 
       <DocSection heading="6. Cookies und ähnliche Technologien">
-        Unsere App und Website nutzen Cookies oder vergleichbare Technologien zur
-        Funktionsgewährleistung, Analyse und ggf. Marketing. Sie können Ihre Cookie-Einstellungen
-        jederzeit ändern oder Ihre Einwilligung widerrufen.
+        Unsere App und Website nutzen Cookies oder vergleichbare Technologien
+        zur Funktionsgewährleistung, Analyse und ggf. Marketing. Sie können Ihre
+        Cookie-Einstellungen jederzeit ändern oder Ihre Einwilligung widerrufen.
       </DocSection>
 
       <DocSection heading="7. Speicherdauer">
-        Personenbezogene Daten werden nur so lange gespeichert, wie dies für die Zwecke der
-        Bearbeitung erforderlich ist oder wie es gesetzliche Aufbewahrungsfristen verlangen.
+        Personenbezogene Daten werden nur so lange gespeichert, wie dies für die
+        Zwecke der Bearbeitung erforderlich ist oder wie es gesetzliche
+        Aufbewahrungsfristen verlangen.
       </DocSection>
 
       <DocSection heading="8. Datenschutzrechte der Nutzer">
-        Sie haben im Rahmen des geltenden Schweizer Datenschutzgesetzes folgende Rechte:
+        Sie haben im Rahmen des geltenden Schweizer Datenschutzgesetzes folgende
+        Rechte:
         <BulletList
           items={[
             "Auskunft über gespeicherte Daten",
@@ -333,23 +374,28 @@ function DeContent() {
       </DocSection>
 
       <DocSection heading="9. Kinderschutz">
-        Unsere Dienste richten sich nicht an Kinder unter 13 Jahren. Wir erfassen wissentlich keine
-        Daten von Kindern ohne Zustimmung der Eltern oder Erziehungsberechtigten.
+        Unsere Dienste richten sich nicht an Kinder unter 13 Jahren. Wir
+        erfassen wissentlich keine Daten von Kindern ohne Zustimmung der Eltern
+        oder Erziehungsberechtigten.
       </DocSection>
 
       <DocSection heading="10. Marketing und Kommunikation">
-        Wenn Sie dem Empfang von Informationen zustimmen, können wir Ihnen Updates oder Angebote
-        senden. Sie können sich jederzeit davon abmelden, z. B. über den Abmeldelink in E-Mails
-        oder durch Kontaktaufnahme mit uns.
+        Wenn Sie dem Empfang von Informationen zustimmen, können wir Ihnen
+        Updates oder Angebote senden. Sie können sich jederzeit davon abmelden,
+        z. B. über den Abmeldelink in E-Mails oder durch Kontaktaufnahme mit
+        uns.
       </DocSection>
 
       <DocSection heading="11. Aktualisierungen der Datenschutzerklärung">
-        Diese Datenschutzerklärung kann aktualisiert werden. Die jeweils aktuelle Version ist über
-        unsere App oder Website einsehbar. Änderungen werden entsprechend kenntlich gemacht.
+        Diese Datenschutzerklärung kann aktualisiert werden. Die jeweils
+        aktuelle Version ist über unsere App oder Website einsehbar. Änderungen
+        werden entsprechend kenntlich gemacht.
       </DocSection>
 
       {/* Contact */}
-      <div style={{ paddingTop: 8, borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+      <div
+        style={{ paddingTop: 8, borderTop: "1px solid rgba(255,255,255,0.08)" }}
+      >
         <h2
           style={{
             fontSize: 17,
@@ -361,10 +407,24 @@ function DeContent() {
         >
           12. Kontakt
         </h2>
-        <p style={{ fontSize: 15, color: "#b6b6b6", lineHeight: 1.75, marginBottom: 16 }}>
+        <p
+          style={{
+            fontSize: 15,
+            color: "#b6b6b6",
+            lineHeight: 1.75,
+            marginBottom: 16,
+          }}
+        >
           Bei Fragen oder zur Ausübung Ihrer Rechte erreichen Sie uns unter:
         </p>
-        <p style={{ fontSize: 15, color: "#b6b6b6", lineHeight: 1.55, margin: 0 }}>
+        <p
+          style={{
+            fontSize: 15,
+            color: "#b6b6b6",
+            lineHeight: 1.55,
+            margin: 0,
+          }}
+        >
           Daniele Citran
           <br />
           Pfruendhofstrasse 54
@@ -373,7 +433,10 @@ function DeContent() {
           <br />
           Schweiz
           <br />
-          <a href="mailto:contact@citran.digital" style={{ color: "#3B82F6", textDecoration: "none" }}>
+          <a
+            href="mailto:contact@citran.digital"
+            style={{ color: "#3B82F6", textDecoration: "none" }}
+          >
             contact@citran.digital
           </a>
         </p>
@@ -387,7 +450,8 @@ function EnContent() {
   return (
     <>
       <DocSection heading="1. Data Controller">
-        The data controller within the meaning of the Swiss Federal Act on Data Protection (FADP) is:
+        The data controller within the meaning of the Swiss Federal Act on Data
+        Protection (FADP) is:
         <AddressBlock
           lines={[
             "Citran Digital",
@@ -410,7 +474,8 @@ function EnContent() {
           ]}
         />
         This data is used to provide, improve and secure our services.
-        <br /><br />
+        <br />
+        <br />
         Data is stored both:
         <BulletList
           items={[
@@ -421,13 +486,17 @@ function EnContent() {
       </DocSection>
 
       <DocSection heading="3. Analytics and Tracking">
-        For usage analytics, we may use services such as Google Analytics or Firebase Analytics.
-        Information about your usage behaviour is stored in pseudonymised form.
-        <br /><br />
-        Processing takes place only with your explicit consent. This consent may be withdrawn at any
-        time with effect for the future.
-        <br /><br />
-        Further information: Google Ireland Ltd., Gordon House, Barrow Street, Dublin 4, Ireland
+        For usage analytics, we may use services such as Google Analytics or
+        Firebase Analytics. Information about your usage behaviour is stored in
+        pseudonymised form.
+        <br />
+        <br />
+        Processing takes place only with your explicit consent. This consent may
+        be withdrawn at any time with effect for the future.
+        <br />
+        <br />
+        Further information: Google Ireland Ltd., Gordon House, Barrow Street,
+        Dublin 4, Ireland
         <br />
         Privacy Policy:{" "}
         <a
@@ -473,7 +542,8 @@ function EnContent() {
             },
             {
               label: "Data type",
-              value: "Screenshots/photos of charts (no direct identification possible)",
+              value:
+                "Screenshots/photos of charts (no direct identification possible)",
             },
             {
               label: "Note",
@@ -495,23 +565,25 @@ function EnContent() {
             "Meta (marketing optimisation)",
           ]}
         />
-        Some of these providers are located outside Switzerland or the EU. Data transfers take place
-        only where an adequate level of data protection is ensured.
+        Some of these providers are located outside Switzerland or the EU. Data
+        transfers take place only where an adequate level of data protection is
+        ensured.
       </DocSection>
 
       <DocSection heading="6. Cookies and Similar Technologies">
-        Our App and website use cookies or similar technologies for functionality, analytics and,
-        where applicable, marketing purposes. You may change your cookie settings or withdraw your
-        consent at any time.
+        Our App and website use cookies or similar technologies for
+        functionality, analytics and, where applicable, marketing purposes. You
+        may change your cookie settings or withdraw your consent at any time.
       </DocSection>
 
       <DocSection heading="7. Retention Period">
-        Personal data is retained only for as long as necessary for the purposes of processing, or
-        as required by statutory retention obligations.
+        Personal data is retained only for as long as necessary for the purposes
+        of processing, or as required by statutory retention obligations.
       </DocSection>
 
       <DocSection heading="8. Data Subject Rights">
-        Under the applicable Swiss Federal Act on Data Protection, you have the following rights:
+        Under the applicable Swiss Federal Act on Data Protection, you have the
+        following rights:
         <BulletList
           items={[
             "Access to stored data",
@@ -522,28 +594,31 @@ function EnContent() {
             "Withdrawal of granted consents",
           ]}
         />
-        You also have the right to lodge a complaint with the Federal Data Protection and
-        Information Commissioner (FDPIC).
+        You also have the right to lodge a complaint with the Federal Data
+        Protection and Information Commissioner (FDPIC).
       </DocSection>
 
       <DocSection heading="9. Child Protection">
-        Our services are not directed at children under the age of 13. We do not knowingly collect
-        data from children without parental or guardian consent.
+        Our services are not directed at children under the age of 13. We do not
+        knowingly collect data from children without parental or guardian
+        consent.
       </DocSection>
 
       <DocSection heading="10. Marketing and Communication">
-        If you consent to receiving information, we may send you updates or offers. You may
-        unsubscribe at any time, e.g. via the unsubscribe link in emails or by contacting us
-        directly.
+        If you consent to receiving information, we may send you updates or
+        offers. You may unsubscribe at any time, e.g. via the unsubscribe link
+        in emails or by contacting us directly.
       </DocSection>
 
       <DocSection heading="11. Updates to this Privacy Policy">
-        This Privacy Policy may be updated. The current version is available via our App or website.
-        Any changes will be communicated accordingly.
+        This Privacy Policy may be updated. The current version is available via
+        our App or website. Any changes will be communicated accordingly.
       </DocSection>
 
       {/* Contact */}
-      <div style={{ paddingTop: 8, borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+      <div
+        style={{ paddingTop: 8, borderTop: "1px solid rgba(255,255,255,0.08)" }}
+      >
         <h2
           style={{
             fontSize: 17,
@@ -555,10 +630,24 @@ function EnContent() {
         >
           12. Contact
         </h2>
-        <p style={{ fontSize: 15, color: "#b6b6b6", lineHeight: 1.75, marginBottom: 16 }}>
+        <p
+          style={{
+            fontSize: 15,
+            color: "#b6b6b6",
+            lineHeight: 1.75,
+            marginBottom: 16,
+          }}
+        >
           For questions or to exercise your rights, please contact us at:
         </p>
-        <p style={{ fontSize: 15, color: "#b6b6b6", lineHeight: 1.55, margin: 0 }}>
+        <p
+          style={{
+            fontSize: 15,
+            color: "#b6b6b6",
+            lineHeight: 1.55,
+            margin: 0,
+          }}
+        >
           Daniele Citran
           <br />
           Pfruendhofstrasse 54
@@ -567,7 +656,10 @@ function EnContent() {
           <br />
           Switzerland
           <br />
-          <a href="mailto:contact@citran.digital" style={{ color: "#3B82F6", textDecoration: "none" }}>
+          <a
+            href="mailto:contact@citran.digital"
+            style={{ color: "#3B82F6", textDecoration: "none" }}
+          >
             contact@citran.digital
           </a>
         </p>
@@ -577,7 +669,13 @@ function EnContent() {
 }
 
 // ─── Helper components ────────────────────────────────────────────────────────
-function DocSection({ heading, children }: { heading: string; children: React.ReactNode }) {
+function DocSection({
+  heading,
+  children,
+}: {
+  heading: string;
+  children: React.ReactNode;
+}) {
   return (
     <div>
       <h2
@@ -591,7 +689,9 @@ function DocSection({ heading, children }: { heading: string; children: React.Re
       >
         {heading}
       </h2>
-      <div style={{ fontSize: 15, color: "#b6b6b6", lineHeight: 1.75 }}>{children}</div>
+      <div style={{ fontSize: 15, color: "#b6b6b6", lineHeight: 1.75 }}>
+        {children}
+      </div>
     </div>
   );
 }
@@ -619,14 +719,24 @@ function BulletList({ items }: { items: string[] }) {
 
 function AddressBlock({ lines, email }: { lines: string[]; email: string }) {
   return (
-    <p style={{ margin: "14px 0 0", fontSize: 15, color: "#b6b6b6", lineHeight: 1.55 }}>
+    <p
+      style={{
+        margin: "14px 0 0",
+        fontSize: 15,
+        color: "#b6b6b6",
+        lineHeight: 1.55,
+      }}
+    >
       {lines.map((line, i) => (
         <span key={i}>
           {line}
           <br />
         </span>
       ))}
-      <a href={`mailto:${email}`} style={{ color: "#3B82F6", textDecoration: "none" }}>
+      <a
+        href={`mailto:${email}`}
+        style={{ color: "#3B82F6", textDecoration: "none" }}
+      >
         {email}
       </a>
     </p>
@@ -664,7 +774,10 @@ function ThirdPartyBox({
       </p>
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
         {rows.map(({ label, value }) => (
-          <div key={label} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+          <div
+            key={label}
+            style={{ display: "flex", gap: 10, alignItems: "flex-start" }}
+          >
             <span
               style={{
                 fontSize: 12,
@@ -677,7 +790,9 @@ function ThirdPartyBox({
             >
               {label}
             </span>
-            <span style={{ fontSize: 14, color: "#b6b6b6", lineHeight: 1.6 }}>{value}</span>
+            <span style={{ fontSize: 14, color: "#b6b6b6", lineHeight: 1.6 }}>
+              {value}
+            </span>
           </div>
         ))}
       </div>
