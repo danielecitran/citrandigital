@@ -21,11 +21,13 @@ const T = {
       ariaHome: "TradeLens – Zurück zur TradeLens-Seite",
     },
     hero: {
-      badge: "KI-gestützte Chart Analysen",
+      badge: "Chart-Analysen in Sekunden",
       headlineL1: "Professionelle KI",
       headlineL2: "Chart Analysen in",
       headlineAccent: "Sekunden.",
       sub: "Lade einen Chart hoch und erhalte sofort eine detaillierte technische Analyse, klare Long/Short-Signale und einen vollständigen Trading-Plan.",
+      exampleNote:
+        "Hinweis: Zahlen & Assets sind Beispiele. In der App analysierst du deinen eigenen Chart.",
       trendLabel: "TREND SIGNAL",
       confidence: "Konfidenz 87%",
       aiLabel: "KI ANALYSE",
@@ -37,7 +39,7 @@ const T = {
       heading: "Wie es funktioniert",
       steps: [
         {
-          title: "Screenshot machen",
+          title: "Chart hochladen",
           description:
             "Fotografiere deinen Chart oder wähle einen Screenshot aus deiner Galerie.",
         },
@@ -95,9 +97,9 @@ const T = {
       headingPart1: "Was Experten Stunden kostet,",
       headingAccent: "erledigt TradeLens in Sekunden.",
       items: [
-        { emoji: "⚡", stat: "6x", label: "schneller", description: "profitable Trades finden als mit manueller Analyse" },
-        { emoji: "💡", stat: "100+", label: "News", description: "gleichzeitig analysiert für jeden deiner Assets" },
-        { emoji: "🎯", stat: "24/7", label: "verfügbar", description: "Dein Trading-Mentor ist immer für dich erreichbar" },
+        { icon: "bolt", stat: "6x", label: "schneller", description: "profitable Trades finden als mit manueller Analyse" },
+        { icon: "spark", stat: "100+", label: "News", description: "gleichzeitig analysiert für jeden deiner Assets" },
+        { icon: "orbit", stat: "24/7", label: "verfügbar", description: "Dein Trading-Mentor ist immer für dich erreichbar" },
       ],
     },
     cta: {
@@ -111,7 +113,7 @@ const T = {
       line2: "App Store",
     },
     footer: {
-      tagline: "KI-gestützte Chart Analysen für smarte Trader.",
+      tagline: "Klare Chart-Analysen. Klare Entscheidungen.",
       connectHeading: "Vernetze dich mit uns",
       legalHeading: "Rechtliches",
       privacyPolicy: "Datenschutzerklärung",
@@ -132,11 +134,13 @@ const T = {
       ariaHome: "TradeLens – Back to the TradeLens page",
     },
     hero: {
-      badge: "AI-powered Chart Analysis",
+      badge: "Chart analysis in seconds",
       headlineL1: "Professional AI",
       headlineL2: "Chart Analysis in",
       headlineAccent: "Seconds.",
       sub: "Upload a chart and instantly receive a detailed technical analysis, clear long/short signals, and a complete trading plan.",
+      exampleNote:
+        "Note: values & assets are examples. In the app, you analyze your own chart.",
       trendLabel: "TREND SIGNAL",
       confidence: "Confidence 87%",
       aiLabel: "AI ANALYSIS",
@@ -148,7 +152,7 @@ const T = {
       heading: "How it works",
       steps: [
         {
-          title: "Take a Screenshot",
+          title: "Upload a Chart",
           description:
             "Photograph your chart or pick a screenshot from your gallery, ready in seconds.",
         },
@@ -206,9 +210,9 @@ const T = {
       headingPart1: "What experts spend hours on,",
       headingAccent: "TradeLens handles in seconds.",
       items: [
-        { emoji: "⚡", stat: "6x", label: "faster", description: "Find profitable trades compared to manual analysis" },
-        { emoji: "💡", stat: "100+", label: "News at once", description: "Analyzed simultaneously for each of your assets" },
-        { emoji: "🎯", stat: "24/7", label: "available", description: "Your AI trading mentor is always there for you" },
+        { icon: "bolt", stat: "6x", label: "faster", description: "Find profitable trades compared to manual analysis" },
+        { icon: "spark", stat: "100+", label: "News at once", description: "Analyzed simultaneously for each of your assets" },
+        { icon: "orbit", stat: "24/7", label: "available", description: "Your AI trading mentor is always there for you" },
       ],
     },
     cta: {
@@ -222,7 +226,7 @@ const T = {
       line2: "App Store",
     },
     footer: {
-      tagline: "AI-powered chart analysis for smart traders.",
+      tagline: "Clear chart analysis. Better decisions.",
       connectHeading: "Connect with us",
       legalHeading: "Legal",
       privacyPolicy: "Privacy Policy",
@@ -346,7 +350,7 @@ function AppStoreBadge({ large = false, locale }: { large?: boolean; locale: Loc
   const lite = useTradeLensMotionLite();
   return (
     <motion.a
-      href="https://apps.apple.com/app/tradelens-chart-analyse/id6753321240"
+      href="https://apps.apple.com/app/id6753321240"
       aria-label="TradeLens im App Store herunterladen"
       whileHover={lite ? undefined : { scale: 1.03, boxShadow: "0 0 28px rgba(59,130,246,0.45)" }}
       whileTap={lite ? { scale: 0.98 } : { scale: 0.97 }}
@@ -384,16 +388,12 @@ function IconBox({ children }: { children: React.ReactNode }) {
   return (
     <div
       style={{
-        width: 48,
-        height: 48,
-        borderRadius: 14,
-        background: "rgba(59,130,246,0.1)",
-        border: "1px solid rgba(59,130,246,0.2)",
-        display: "flex",
+        display: "inline-flex",
         alignItems: "center",
         justifyContent: "center",
-        marginBottom: 20,
+        marginBottom: 18,
         flexShrink: 0,
+        filter: "drop-shadow(0 0 14px rgba(59,130,246,0.22))",
       }}
     >
       {children}
@@ -456,6 +456,22 @@ const ICONS = {
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
       <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
       <circle cx="12" cy="7" r="4" />
+    </svg>
+  ),
+  boltMini: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z" />
+    </svg>
+  ),
+  sparkMini: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="m12 3-1.7 5.2a2 2 0 0 1-1.3 1.3L3 12l5.2 1.7a2 2 0 0 1 1.3 1.3L12 21l1.7-5.2a2 2 0 0 1 1.3-1.3L21 12l-5.2-1.7a2 2 0 0 1-1.3-1.3L12 3Z" />
+    </svg>
+  ),
+  orbitMini: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="9" opacity="0.7" />
+      <path d="M12 7v5l3 2" />
     </svg>
   ),
 };
@@ -571,10 +587,16 @@ function TLNav({ locale }: { locale: Locale }) {
 function TLHero({ locale }: { locale: Locale }) {
   const t = T[locale].hero;
   const lite = useTradeLensMotionLite();
+  const [heroCardIndex, setHeroCardIndex] = useState(1);
 
   return (
     <section
-      style={{ position: "relative", overflow: "hidden", padding: "100px 24px 80px", textAlign: "center" }}
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        padding: "100px 24px 96px",
+        textAlign: "center",
+      }}
     >
       {lite ? (
         <>
@@ -647,36 +669,16 @@ function TLHero({ locale }: { locale: Locale }) {
       )}
 
       <div style={{ position: "relative", zIndex: 1, maxWidth: 820, margin: "0 auto" }}>
+        {/* Hero rhythm: headline → sub → CTA → cards → note (consistent spacing) */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 0,
+          }}
+        >
         <FadeUp>
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              background: "rgba(59,130,246,0.08)",
-              border: "1px solid rgba(59,130,246,0.25)",
-              borderRadius: 100,
-              padding: "7px 18px",
-              marginBottom: 32,
-            }}
-          >
-            <span
-              style={{
-                display: "inline-block",
-                width: 7,
-                height: 7,
-                borderRadius: "50%",
-                background: "#3B82F6",
-                boxShadow: "0 0 8px rgba(59,130,246,0.9)",
-              }}
-            />
-            <span style={{ fontSize: 13, fontWeight: 600, color: "#60A5FA", letterSpacing: "0.02em" }}>
-              {t.badge}
-            </span>
-          </div>
-        </FadeUp>
-
-        <FadeUp delay={0.1}>
           <h1
             style={{
               fontSize: "clamp(36px, 6.5vw, 70px)",
@@ -684,7 +686,7 @@ function TLHero({ locale }: { locale: Locale }) {
               letterSpacing: "-0.05em",
               lineHeight: 1.02,
               color: "#ffffff",
-              margin: "0 0 28px",
+              margin: "0 0 24px",
             }}
           >
             {t.headlineL1}
@@ -696,7 +698,7 @@ function TLHero({ locale }: { locale: Locale }) {
           </h1>
         </FadeUp>
 
-        <FadeUp delay={0.2}>
+        <FadeUp delay={0.1}>
           <p
             style={{
               fontSize: "clamp(16px, 2vw, 20px)",
@@ -704,21 +706,219 @@ function TLHero({ locale }: { locale: Locale }) {
               lineHeight: 1.7,
               color: "#b6b6b6",
               maxWidth: 600,
-              margin: "0 auto 44px",
+              margin: "0 0 44px",
             }}
           >
             {t.sub}
           </p>
         </FadeUp>
 
-        <FadeUp delay={0.3}>
+        <FadeUp delay={0.2}>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <AppStoreBadge large locale={locale} />
+            <div className="md:hidden">
+              <AppStoreBadge locale={locale} />
+            </div>
+            <div className="hidden md:block">
+              <AppStoreBadge large locale={locale} />
+            </div>
           </div>
         </FadeUp>
 
-        <FadeUp delay={0.45}>
-          <div className="flex flex-wrap justify-center gap-4 mt-16">
+        <div aria-hidden="true" style={{ height: 56 }} />
+
+        <FadeUp delay={0.3}>
+          {/* Mobile: touchable overlapping cards (angled peeks) */}
+          <div
+            className="md:hidden"
+            style={{
+              position: "relative",
+              height: 196,
+              width: "min(520px, 100%)",
+              margin: "0 auto",
+            }}
+          >
+            <div
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                inset: -22,
+                background:
+                  "radial-gradient(ellipse at center, rgba(59,130,246,0.12) 0%, rgba(0,0,0,0) 62%)",
+                filter: "blur(12px)",
+                opacity: 0.7,
+              }}
+            />
+            <motion.div
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.12}
+              onDragEnd={(_, info) => {
+                const swipe = info.offset.x + info.velocity.x * 0.15;
+                if (swipe > 60) setHeroCardIndex((v) => Math.max(0, v - 1));
+                if (swipe < -60) setHeroCardIndex((v) => Math.min(2, v + 1));
+              }}
+              style={{ position: "absolute", inset: 0, touchAction: "pan-y" }}
+            >
+              {([0, 1, 2] as const).map((idx) => {
+                const isCenter = idx === heroCardIndex;
+                const isLeft = idx === heroCardIndex - 1;
+                const isRight = idx === heroCardIndex + 1;
+
+                const baseCardStyle: React.CSSProperties = {
+                  position: "absolute",
+                  top: 0,
+                  left: "50%",
+                  translate: "-50% 0",
+                  borderRadius: 20,
+                  textAlign: "left",
+                  boxShadow:
+                    "0 14px 54px rgba(0,0,0,0.72), inset 0 1px 0 rgba(255,255,255,0.07)",
+                  backdropFilter: lite ? undefined : "blur(12px)",
+                  WebkitBackdropFilter: lite ? undefined : "blur(12px)",
+                  width: 238,
+                  padding: "16px 16px",
+                  cursor: "pointer",
+                  userSelect: "none",
+                  WebkitUserSelect: "none",
+                };
+
+                const bgPrimary =
+                  "linear-gradient(180deg, rgba(59,130,246,0.14) 0%, rgba(59,130,246,0.06) 45%, rgba(0,0,0,0) 100%), rgba(12,12,12,0.72)";
+                const bgSecondary =
+                  "linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 50%, rgba(0,0,0,0) 100%), rgba(19,19,19,0.72)";
+                const bg = idx === 1 ? bgPrimary : bgSecondary;
+
+                const animate = isCenter
+                  ? { x: 0, rotate: 0, scale: 1, opacity: 1, zIndex: 3 }
+                  : isLeft
+                    ? { x: -112, rotate: -8, scale: 0.92, opacity: 0.82, zIndex: 2 }
+                    : isRight
+                      ? { x: 112, rotate: 8, scale: 0.92, opacity: 0.82, zIndex: 2 }
+                      : { x: idx < heroCardIndex ? -180 : 180, rotate: idx < heroCardIndex ? -10 : 10, scale: 0.9, opacity: 0, zIndex: 1 };
+
+                return (
+                  <motion.div
+                    key={idx}
+                    initial={false}
+                    animate={animate}
+                    transition={{ type: "spring", stiffness: 260, damping: 26, mass: 0.9 }}
+                    style={{
+                      ...baseCardStyle,
+                      background: isCenter
+                        ? (idx === 1
+                            ? bgPrimary.replace("rgba(12,12,12,0.72)", "rgba(12,12,12,0.96)")
+                            : bgSecondary.replace("rgba(19,19,19,0.72)", "rgba(19,19,19,0.94)"))
+                        : bg,
+                    }}
+                    onClick={() => setHeroCardIndex(idx)}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`Hero card ${idx + 1}`}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") setHeroCardIndex(idx);
+                      if (e.key === "ArrowLeft") setHeroCardIndex((v) => Math.max(0, v - 1));
+                      if (e.key === "ArrowRight") setHeroCardIndex((v) => Math.min(2, v + 1));
+                    }}
+                  >
+                    {idx === 0 ? (
+                      <>
+                        <div
+                          style={{
+                            width: 30,
+                            height: 30,
+                            borderRadius: 10,
+                            background: "rgba(34,197,94,0.12)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            marginBottom: 10,
+                            boxShadow: "0 0 0 rgba(0,0,0,0), 0 0 18px rgba(34,197,94,0.12)",
+                          }}
+                        >
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                            <polyline points="16 7 22 7 22 13" />
+                          </svg>
+                        </div>
+                        <div style={{ fontSize: 10, color: "#7f7f7f", letterSpacing: "0.06em", marginBottom: 6 }}>
+                          {t.trendLabel}
+                        </div>
+                        <div style={{ fontSize: 20, fontWeight: 800, color: "#22C55E", letterSpacing: "-0.03em" }}>
+                          Long ↑
+                        </div>
+                        <div style={{ fontSize: 10, color: "#7f7f7f", marginTop: 6 }}>{t.confidence}</div>
+                      </>
+                    ) : idx === 1 ? (
+                      <>
+                        <div style={{ fontSize: 10, color: "#3B82F6", fontWeight: 700, letterSpacing: "0.08em", marginBottom: 10 }}>
+                          {t.aiLabel}
+                        </div>
+                        <div style={{ fontSize: 13, fontWeight: 700, color: "#fff", marginBottom: 12 }}>BTC / USD</div>
+                        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                          {[
+                            { label: "Entry", value: "$43,200", color: "#ffffff" },
+                            { label: "Stop-Loss", value: "$41,800", color: "#ef4444" },
+                            { label: "Target", value: "$46,500", color: "#22C55E" },
+                          ].map(({ label, value, color }) => (
+                            <div key={label} style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                              <span style={{ fontSize: 11, color: "#7f7f7f" }}>{label}</span>
+                              <span style={{ fontSize: 12, fontWeight: 700, color }}>{value}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div
+                          style={{
+                            width: 30,
+                            height: 30,
+                            borderRadius: 10,
+                            background: "rgba(59,130,246,0.1)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            marginBottom: 10,
+                            boxShadow: "0 0 0 rgba(0,0,0,0), 0 0 18px rgba(59,130,246,0.14)",
+                          }}
+                        >
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2" />
+                          </svg>
+                        </div>
+                        <div style={{ fontSize: 10, color: "#7f7f7f", letterSpacing: "0.06em", marginBottom: 6 }}>
+                          {t.newsLabel}
+                        </div>
+                        <div style={{ fontSize: 13, fontWeight: 700, color: "#fff", marginBottom: 10 }}>
+                          {t.sentiment}
+                        </div>
+                        <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
+                          {["Bullish", "+2.3%", "100+ News"].map((tag) => (
+                            <span
+                              key={tag}
+                              style={{
+                                fontSize: 10,
+                                fontWeight: 600,
+                                padding: "3px 8px",
+                                borderRadius: 100,
+                                background: "rgba(59,130,246,0.1)",
+                                color: "#60A5FA",
+                              }}
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </>
+                    )}
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </div>
+
+          {/* Desktop: simple aligned trio */}
+          <div className="hidden md:flex flex-wrap justify-center gap-4 mt-16 mb-10">
             {/* Card 1: Signal */}
             <motion.div
               animate={lite ? false : { y: [0, -10, 0] }}
@@ -726,13 +926,16 @@ function TLHero({ locale }: { locale: Locale }) {
                 lite ? undefined : { duration: 4.5, ease: "easeInOut", repeat: Infinity }
               }
               style={{
-                background: "#131313",
-                border: "1px solid rgba(255,255,255,0.08)",
+                background:
+                  "linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 50%, rgba(0,0,0,0) 100%), rgba(19,19,19,0.72)",
                 borderRadius: 20,
                 padding: "20px 22px",
                 width: 180,
                 textAlign: "left",
-                boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
+                boxShadow:
+                  "0 10px 38px rgba(0,0,0,0.62), inset 0 1px 0 rgba(255,255,255,0.06)",
+                backdropFilter: lite ? undefined : "blur(10px)",
+                WebkitBackdropFilter: lite ? undefined : "blur(10px)",
               }}
             >
               <div
@@ -741,11 +944,11 @@ function TLHero({ locale }: { locale: Locale }) {
                   height: 34,
                   borderRadius: 10,
                   background: "rgba(34,197,94,0.12)",
-                  border: "1px solid rgba(34,197,94,0.2)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   marginBottom: 12,
+                  boxShadow: "0 0 0 rgba(0,0,0,0), 0 0 18px rgba(34,197,94,0.12)",
                 }}
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -771,13 +974,16 @@ function TLHero({ locale }: { locale: Locale }) {
                   : { duration: 5.5, ease: "easeInOut", repeat: Infinity, delay: 0.4 }
               }
               style={{
-                background: "#0f0f0f",
-                border: "1px solid rgba(59,130,246,0.25)",
+                background:
+                  "linear-gradient(180deg, rgba(59,130,246,0.14) 0%, rgba(59,130,246,0.06) 45%, rgba(0,0,0,0) 100%), rgba(12,12,12,0.72)",
                 borderRadius: 20,
                 padding: "22px 26px",
                 width: 210,
                 textAlign: "left",
-                boxShadow: "0 8px 40px rgba(0,0,0,0.6), 0 0 40px rgba(59,130,246,0.1)",
+                boxShadow:
+                  "0 14px 54px rgba(0,0,0,0.72), 0 0 44px rgba(59,130,246,0.10), inset 0 1px 0 rgba(255,255,255,0.07)",
+                backdropFilter: lite ? undefined : "blur(12px)",
+                WebkitBackdropFilter: lite ? undefined : "blur(12px)",
               }}
             >
               <div style={{ fontSize: 10, color: "#3B82F6", fontWeight: 700, letterSpacing: "0.08em", marginBottom: 10 }}>
@@ -805,13 +1011,16 @@ function TLHero({ locale }: { locale: Locale }) {
                 lite ? undefined : { duration: 4, ease: "easeInOut", repeat: Infinity, delay: 0.8 }
               }
               style={{
-                background: "#131313",
-                border: "1px solid rgba(255,255,255,0.08)",
+                background:
+                  "linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 50%, rgba(0,0,0,0) 100%), rgba(19,19,19,0.72)",
                 borderRadius: 20,
                 padding: "20px 22px",
                 width: 180,
                 textAlign: "left",
-                boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
+                boxShadow:
+                  "0 10px 38px rgba(0,0,0,0.62), inset 0 1px 0 rgba(255,255,255,0.06)",
+                backdropFilter: lite ? undefined : "blur(10px)",
+                WebkitBackdropFilter: lite ? undefined : "blur(10px)",
               }}
             >
               <div
@@ -820,11 +1029,11 @@ function TLHero({ locale }: { locale: Locale }) {
                   height: 34,
                   borderRadius: 10,
                   background: "rgba(59,130,246,0.1)",
-                  border: "1px solid rgba(59,130,246,0.2)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   marginBottom: 12,
+                  boxShadow: "0 0 0 rgba(0,0,0,0), 0 0 18px rgba(59,130,246,0.14)",
                 }}
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -848,7 +1057,6 @@ function TLHero({ locale }: { locale: Locale }) {
                       borderRadius: 100,
                       background: "rgba(59,130,246,0.1)",
                       color: "#60A5FA",
-                      border: "1px solid rgba(59,130,246,0.2)",
                     }}
                   >
                     {tag}
@@ -857,7 +1065,19 @@ function TLHero({ locale }: { locale: Locale }) {
               </div>
             </motion.div>
           </div>
+          <p
+            style={{
+              marginTop: 12,
+              fontSize: 11,
+              color: "rgba(182,182,182,0.72)",
+              letterSpacing: "0.01em",
+            }}
+          >
+            {t.exampleNote}
+          </p>
         </FadeUp>
+
+        </div>
       </div>
     </section>
   );
@@ -866,7 +1086,6 @@ function TLHero({ locale }: { locale: Locale }) {
 // ─── HOW IT WORKS ─────────────────────────────────────────────────────────────
 function TLHowItWorks({ locale }: { locale: Locale }) {
   const t = T[locale].howItWorks;
-  const lite = useTradeLensMotionLite();
 
   return (
     <section id="how-it-works" style={{ padding: "100px 24px", background: "#010101" }}>
@@ -898,52 +1117,92 @@ function TLHowItWorks({ locale }: { locale: Locale }) {
           </h2>
         </FadeUp>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {t.steps.map((step, i) => (
-            <FadeUp key={step.title} delay={i * 0.12}>
-              <motion.div
-                whileHover={
-                  lite ? undefined : { scale: 1.02, borderColor: "rgba(59,130,246,0.3)" }
-                }
-                transition={{ duration: 0.3 }}
-                style={{
-                  background: "#131313",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                  borderRadius: 22,
-                  padding: "32px 28px",
-                  height: "100%",
-                  boxShadow: "0 4px 24px rgba(0,0,0,0.4)",
-                }}
-              >
+        {/* Steps: clean flow layout (no "cards", no absolute timeline) */}
+        <div style={{ maxWidth: 920, margin: "0 auto" }}>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {t.steps.map((step, i) => (
+              <FadeUp key={step.title} delay={i * 0.08}>
                 <div
                   style={{
-                    fontSize: 13,
-                    fontWeight: 800,
-                    color: "#3B82F6",
-                    letterSpacing: "0.02em",
-                    marginBottom: 20,
+                    display: "grid",
+                    gridTemplateColumns: "84px 1fr",
+                    gap: 18,
+                    alignItems: "start",
+                    padding: i === t.steps.length - 1 ? "10px 0" : "10px 0 36px",
                   }}
                 >
-                  {t.stepLabel(i + 1)}
+                  {/* Left rail: step index + connector */}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                    aria-hidden="true"
+                  >
+                    <div
+                      style={{
+                        width: 52,
+                        height: 52,
+                        borderRadius: 9999,
+                        display: "grid",
+                        placeItems: "center",
+                        background:
+                          "radial-gradient(circle at 30% 30%, rgba(96,165,250,0.20), rgba(59,130,246,0.07) 55%, rgba(0,0,0,0) 72%)",
+                        boxShadow:
+                          "0 0 0 rgba(0,0,0,0), 0 0 30px rgba(59,130,246,0.14), inset 0 1px 0 rgba(255,255,255,0.06)",
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontSize: 13,
+                          fontWeight: 850,
+                          letterSpacing: "0.12em",
+                          color: "#93c5fd",
+                        }}
+                      >
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                    </div>
+                    {i !== t.steps.length - 1 ? (
+                      <div
+                        style={{
+                          width: 2,
+                          flex: 1,
+                          marginTop: 10,
+                          background:
+                            "linear-gradient(180deg, rgba(59,130,246,0.32) 0%, rgba(255,255,255,0.08) 60%, rgba(255,255,255,0) 100%)",
+                          minHeight: 44,
+                        }}
+                      />
+                    ) : null}
+                  </div>
+
+                  {/* Content */}
+                  <div
+                    style={{
+                      borderBottom: "none",
+                    }}
+                  >
+                    <h3
+                      style={{
+                        fontSize: 22,
+                        fontWeight: 800,
+                        color: "#ffffff",
+                        letterSpacing: "-0.04em",
+                        margin: "2px 0 10px",
+                      }}
+                    >
+                      {step.title}
+                    </h3>
+                    <p style={{ fontSize: 15, lineHeight: 1.7, color: "#b6b6b6", margin: 0, maxWidth: 640 }}>
+                      {step.description}
+                    </p>
+                  </div>
                 </div>
-                <IconBox>{STEP_ICONS[i]}</IconBox>
-                <h3
-                  style={{
-                    fontSize: 20,
-                    fontWeight: 700,
-                    color: "#ffffff",
-                    letterSpacing: "-0.03em",
-                    marginBottom: 12,
-                  }}
-                >
-                  {step.title}
-                </h3>
-                <p style={{ fontSize: 15, lineHeight: 1.65, color: "#b6b6b6", margin: 0 }}>
-                  {step.description}
-                </p>
-              </motion.div>
-            </FadeUp>
-          ))}
+              </FadeUp>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -953,7 +1212,6 @@ function TLHowItWorks({ locale }: { locale: Locale }) {
 // ─── FEATURES SECTION ─────────────────────────────────────────────────────────
 function TLFeatures({ locale }: { locale: Locale }) {
   const t = T[locale].features;
-  const lite = useTradeLensMotionLite();
 
   return (
     <section id="features" style={{ padding: "100px 24px", background: "#0a0a0a" }}>
@@ -988,48 +1246,55 @@ function TLFeatures({ locale }: { locale: Locale }) {
           </p>
         </FadeUp>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {t.items.map((feat, i) => (
-            <FadeUp key={feat.title} delay={i * 0.1}>
-              <motion.div
-                whileHover={
-                  lite
-                    ? undefined
-                    : {
-                        scale: 1.02,
-                        borderColor: "rgba(59,130,246,0.3)",
-                        boxShadow:
-                          "0 8px 40px rgba(0,0,0,0.5), 0 0 20px rgba(59,130,246,0.08)",
-                      }
-                }
-                transition={{ duration: 0.3 }}
-                style={{
-                  background: "#131313",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                  borderRadius: 22,
-                  padding: "32px 30px",
-                  height: "100%",
-                  boxShadow: "0 4px 24px rgba(0,0,0,0.4)",
-                }}
-              >
-                <IconBox>{FEATURE_ICONS[i]}</IconBox>
-                <h3
+        {/* Editorial feature list (spacing > dividers; no "card stack") */}
+        <div style={{ maxWidth: 980, margin: "0 auto" }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-10">
+            {t.items.map((feat, i) => (
+              <FadeUp key={feat.title} delay={i * 0.06}>
+                <div
                   style={{
-                    fontSize: 19,
-                    fontWeight: 700,
-                    color: "#ffffff",
-                    letterSpacing: "-0.03em",
-                    marginBottom: 10,
+                    display: "grid",
+                    gridTemplateColumns: "40px 1fr",
+                    gap: 16,
+                    alignItems: "flex-start",
                   }}
                 >
-                  {feat.title}
-                </h3>
-                <p style={{ fontSize: 15, lineHeight: 1.65, color: "#b6b6b6", margin: 0 }}>
-                  {feat.description}
-                </p>
-              </motion.div>
-            </FadeUp>
-          ))}
+                  <div aria-hidden="true" style={{ paddingTop: 2 }}>
+                    <div
+                      style={{
+                        width: 34,
+                        height: 34,
+                        borderRadius: 9999,
+                        display: "grid",
+                        placeItems: "center",
+                        background:
+                          "radial-gradient(circle at 30% 30%, rgba(96,165,250,0.16), rgba(59,130,246,0.07) 55%, rgba(0,0,0,0) 72%)",
+                        boxShadow: "0 0 0 rgba(0,0,0,0), 0 0 26px rgba(59,130,246,0.10)",
+                      }}
+                    >
+                      {FEATURE_ICONS[i]}
+                    </div>
+                  </div>
+                  <div>
+                    <h3
+                      style={{
+                        fontSize: 18,
+                        fontWeight: 800,
+                        color: "#ffffff",
+                        letterSpacing: "-0.03em",
+                        margin: "0 0 8px",
+                      }}
+                    >
+                      {feat.title}
+                    </h3>
+                    <p style={{ fontSize: 15, lineHeight: 1.7, color: "#b6b6b6", margin: 0 }}>
+                      {feat.description}
+                    </p>
+                  </div>
+                </div>
+              </FadeUp>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -1043,7 +1308,7 @@ function TLValueProps({ locale }: { locale: Locale }) {
   return (
     <section style={{ padding: "100px 24px", background: "#010101" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-        <FadeUp className="text-center mb-16">
+        <FadeUp className="text-center">
           <h2
             style={{
               fontSize: "clamp(26px, 4vw, 46px)",
@@ -1051,7 +1316,7 @@ function TLValueProps({ locale }: { locale: Locale }) {
               letterSpacing: "-0.04em",
               color: "#ffffff",
               maxWidth: 700,
-              margin: "0 auto",
+              margin: "0 auto 56px",
             }}
           >
             {t.headingPart1}{" "}
@@ -1059,49 +1324,63 @@ function TLValueProps({ locale }: { locale: Locale }) {
           </h2>
         </FadeUp>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {t.items.map((vp, i) => (
-            <FadeUp key={vp.label} delay={i * 0.12}>
-              <div
-                style={{
-                  background: "#131313",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                  borderRadius: 22,
-                  padding: "40px 32px",
-                  textAlign: "center",
-                  boxShadow: "0 4px 24px rgba(0,0,0,0.4)",
-                }}
-              >
-                <div style={{ fontSize: 36, marginBottom: 16 }}>{vp.emoji}</div>
-                <div
-                  style={{
-                    fontSize: 52,
-                    fontWeight: 800,
-                    letterSpacing: "-0.05em",
-                    color: "#ffffff",
-                    lineHeight: 1,
-                    marginBottom: 4,
-                  }}
-                >
-                  {vp.stat}
+        {/* Clean 3-up benefits (typography + whitespace, no gradients) */}
+        <div style={{ maxWidth: 980, margin: "0 auto" }}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-14 md:gap-16">
+            {t.items.map((vp, i) => (
+              <FadeUp key={vp.label} delay={i * 0.08}>
+                <div style={{ textAlign: "left" }}>
+                  <div
+                    style={{
+                      fontSize: 64,
+                      fontWeight: 900,
+                      letterSpacing: "-0.08em",
+                      lineHeight: 0.98,
+                      color: "#ffffff",
+                      marginBottom: 10,
+                    }}
+                  >
+                    {vp.stat}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: 16,
+                      fontWeight: 800,
+                      letterSpacing: "-0.02em",
+                      color: "#ffffff",
+                      marginBottom: 10,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 10,
+                    }}
+                  >
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        width: 18,
+                        height: 2,
+                        borderRadius: 9999,
+                        background: "rgba(59,130,246,0.9)",
+                        flexShrink: 0,
+                      }}
+                    />
+                    <span style={{ color: "rgba(147,197,253,0.92)" }}>{vp.label}</span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: 15,
+                      lineHeight: 1.75,
+                      color: "#b6b6b6",
+                      margin: 0,
+                      maxWidth: 360,
+                    }}
+                  >
+                    {vp.description}
+                  </p>
                 </div>
-                <div
-                  style={{
-                    fontSize: 16,
-                    fontWeight: 700,
-                    color: "#3B82F6",
-                    marginBottom: 12,
-                    letterSpacing: "-0.01em",
-                  }}
-                >
-                  {vp.label}
-                </div>
-                <p style={{ fontSize: 14, color: "#b6b6b6", lineHeight: 1.6, margin: 0 }}>
-                  {vp.description}
-                </p>
-              </div>
-            </FadeUp>
-          ))}
+              </FadeUp>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -1233,7 +1512,12 @@ function TLDownloadCTA({ locale }: { locale: Locale }) {
 
         <FadeUp delay={0.3}>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <AppStoreBadge large locale={locale} />
+            <div className="md:hidden">
+              <AppStoreBadge locale={locale} />
+            </div>
+            <div className="hidden md:block">
+              <AppStoreBadge large locale={locale} />
+            </div>
           </div>
         </FadeUp>
       </div>
@@ -1299,23 +1583,23 @@ function TLFooter({ locale }: { locale: Locale }) {
                 style={{
                   width: 44,
                   height: 44,
-                  borderRadius: 12,
+                  borderRadius: 9999,
                   background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(255,255,255,0.08)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   color: "#b6b6b6",
                   textDecoration: "none",
-                  transition: "background 0.2s, border-color 0.2s",
+                  transition: "background 0.2s",
                 }}
                 onMouseEnter={(e) => {
                   (e.currentTarget as HTMLElement).style.background = "rgba(59,130,246,0.1)";
-                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(59,130,246,0.3)";
+                  (e.currentTarget as HTMLElement).style.boxShadow =
+                    "0 10px 34px rgba(0,0,0,0.55), 0 0 22px rgba(59,130,246,0.16), inset 0 1px 0 rgba(255,255,255,0.06)";
                 }}
                 onMouseLeave={(e) => {
                   (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
-                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.08)";
+                  (e.currentTarget as HTMLElement).style.boxShadow = "none";
                 }}
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -1332,23 +1616,23 @@ function TLFooter({ locale }: { locale: Locale }) {
                 style={{
                   width: 44,
                   height: 44,
-                  borderRadius: 12,
+                  borderRadius: 9999,
                   background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(255,255,255,0.08)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   color: "#b6b6b6",
                   textDecoration: "none",
-                  transition: "background 0.2s, border-color 0.2s",
+                  transition: "background 0.2s",
                 }}
                 onMouseEnter={(e) => {
                   (e.currentTarget as HTMLElement).style.background = "rgba(59,130,246,0.1)";
-                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(59,130,246,0.3)";
+                  (e.currentTarget as HTMLElement).style.boxShadow =
+                    "0 10px 34px rgba(0,0,0,0.55), 0 0 22px rgba(59,130,246,0.16), inset 0 1px 0 rgba(255,255,255,0.06)";
                 }}
                 onMouseLeave={(e) => {
                   (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
-                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.08)";
+                  (e.currentTarget as HTMLElement).style.boxShadow = "none";
                 }}
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
@@ -1365,23 +1649,23 @@ function TLFooter({ locale }: { locale: Locale }) {
                 style={{
                   width: 44,
                   height: 44,
-                  borderRadius: 12,
+                  borderRadius: 9999,
                   background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(255,255,255,0.08)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   color: "#b6b6b6",
                   textDecoration: "none",
-                  transition: "background 0.2s, border-color 0.2s",
+                  transition: "background 0.2s",
                 }}
                 onMouseEnter={(e) => {
                   (e.currentTarget as HTMLElement).style.background = "rgba(59,130,246,0.1)";
-                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(59,130,246,0.3)";
+                  (e.currentTarget as HTMLElement).style.boxShadow =
+                    "0 10px 34px rgba(0,0,0,0.55), 0 0 22px rgba(59,130,246,0.16), inset 0 1px 0 rgba(255,255,255,0.06)";
                 }}
                 onMouseLeave={(e) => {
                   (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
-                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.08)";
+                  (e.currentTarget as HTMLElement).style.boxShadow = "none";
                 }}
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
@@ -1495,10 +1779,36 @@ export function TradeLensPage({ locale }: Props) {
           color: "#ffffff",
           minHeight: "100vh",
           overflowX: "hidden",
+          position: "relative",
         }}
       >
+        {/* Ambient background (subtle, non-distracting) */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            pointerEvents: "none",
+            zIndex: 0,
+            background:
+              "radial-gradient(900px 600px at 12% 16%, rgba(59,130,246,0.10) 0%, rgba(0,0,0,0) 60%), radial-gradient(700px 480px at 88% 28%, rgba(99,102,241,0.08) 0%, rgba(0,0,0,0) 58%), radial-gradient(900px 520px at 50% 92%, rgba(34,197,94,0.05) 0%, rgba(0,0,0,0) 60%)",
+            opacity: motionLite ? 0.55 : 0.8,
+          }}
+        />
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            pointerEvents: "none",
+            zIndex: 0,
+            backgroundImage:
+              "repeating-linear-gradient(0deg, rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 1px, rgba(0,0,0,0) 2px, rgba(0,0,0,0) 6px)",
+            opacity: motionLite ? 0 : 0.18,
+          }}
+        />
         <TLNav locale={locale} />
-        <main>
+        <main style={{ position: "relative", zIndex: 1 }}>
           <TLHero locale={locale} />
           <TLHowItWorks locale={locale} />
           <TLFeatures locale={locale} />

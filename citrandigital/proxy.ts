@@ -16,6 +16,11 @@ function localeFromPathname(pathname: string): Locale | null {
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Allow non-localized direct download redirect.
+  if (pathname === "/tradelens/download") {
+    return NextResponse.next();
+  }
+
   const pathnameLocale = localeFromPathname(pathname);
 
   if (pathnameLocale) {
