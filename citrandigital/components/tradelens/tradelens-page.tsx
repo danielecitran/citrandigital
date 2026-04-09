@@ -3,7 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useInView, useReducedMotion } from "framer-motion";
-import { createContext, useContext, useRef, useEffect, useState, useSyncExternalStore } from "react";
+import {
+  createContext,
+  useContext,
+  useRef,
+  useEffect,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import type { Locale } from "@/lib/i18n";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -59,7 +66,8 @@ const T = {
     features: {
       eyebrow: "Funktionen",
       heading: "Was TradeLens kann",
-      subtitle: "Alles was du brauchst, um besser zu traden wurde in einer App entwickelt.",
+      subtitle:
+        "Alles was du brauchst, um besser zu traden wurde in einer App entwickelt.",
       items: [
         {
           title: "KI Chart Analyse",
@@ -97,9 +105,24 @@ const T = {
       headingPart1: "Was Experten Stunden kostet,",
       headingAccent: "erledigt TradeLens in Sekunden.",
       items: [
-        { icon: "bolt", stat: "6x", label: "schneller", description: "profitable Trades finden als mit manueller Analyse" },
-        { icon: "spark", stat: "100+", label: "News", description: "gleichzeitig analysiert für jeden deiner Assets" },
-        { icon: "orbit", stat: "24/7", label: "verfügbar", description: "Dein Trading-Mentor ist immer für dich erreichbar" },
+        {
+          icon: "bolt",
+          stat: "Bis zu 6x",
+          label: "schneller",
+          description: "profitable Trades finden als mit manueller Analyse",
+        },
+        {
+          icon: "spark",
+          stat: "100+",
+          label: "News",
+          description: "gleichzeitig analysiert für jeden deiner Assets",
+        },
+        {
+          icon: "orbit",
+          stat: "24/7",
+          label: "verfügbar",
+          description: "Dein Trading-Mentor ist immer für dich erreichbar",
+        },
       ],
     },
     cta: {
@@ -119,7 +142,8 @@ const T = {
       privacyPolicy: "Datenschutzerklärung",
       termsOfUse: "Nutzungsbedingungen",
       contactHeading: "Kontakt",
-      copyright: (year: number) => `© ${year} Citran Digital. Alle Rechte vorbehalten.`,
+      copyright: (year: number) =>
+        `© ${year} Citran Digital. Alle Rechte vorbehalten.`,
       ariaTikTok: "TradeLens auf TikTok",
       ariaInstagram: "TradeLens auf Instagram",
       ariaEmail: "TradeLens per E-Mail kontaktieren",
@@ -210,9 +234,24 @@ const T = {
       headingPart1: "What experts spend hours on,",
       headingAccent: "TradeLens handles in seconds.",
       items: [
-        { icon: "bolt", stat: "6x", label: "faster", description: "Find profitable trades compared to manual analysis" },
-        { icon: "spark", stat: "100+", label: "News at once", description: "Analyzed simultaneously for each of your assets" },
-        { icon: "orbit", stat: "24/7", label: "available", description: "Your AI trading mentor is always there for you" },
+        {
+          icon: "bolt",
+          stat: "Up to 6x",
+          label: "faster",
+          description: "Find profitable trades compared to manual analysis",
+        },
+        {
+          icon: "spark",
+          stat: "100+",
+          label: "News at once",
+          description: "Analyzed simultaneously for each of your assets",
+        },
+        {
+          icon: "orbit",
+          stat: "24/7",
+          label: "available",
+          description: "Your AI trading mentor is always there for you",
+        },
       ],
     },
     cta: {
@@ -232,7 +271,8 @@ const T = {
       privacyPolicy: "Privacy Policy",
       termsOfUse: "Terms of Use",
       contactHeading: "Contact",
-      copyright: (year: number) => `© ${year} Citran Digital. All rights reserved.`,
+      copyright: (year: number) =>
+        `© ${year} Citran Digital. All rights reserved.`,
       ariaTikTok: "TradeLens on TikTok",
       ariaInstagram: "TradeLens on Instagram",
       ariaEmail: "Contact TradeLens by email",
@@ -260,7 +300,8 @@ function subscribeTradeLensMotionLite(onStoreChange: () => void) {
 function getTradeLensMotionLiteSnapshot(): boolean {
   if (typeof window === "undefined") return false;
   return (
-    window.matchMedia("(hover: none)").matches || window.matchMedia("(max-width: 768px)").matches
+    window.matchMedia("(hover: none)").matches ||
+    window.matchMedia("(max-width: 768px)").matches
   );
 }
 
@@ -269,7 +310,7 @@ function useTradeLensMotionLiteFlag(): boolean {
   const mediaLite = useSyncExternalStore(
     subscribeTradeLensMotionLite,
     getTradeLensMotionLiteSnapshot,
-    () => false
+    () => false,
   );
   return Boolean(prefersReduced || mediaLite);
 }
@@ -283,7 +324,7 @@ const TL_NAV_ANCHOR_OFFSET_PX = 88;
 
 function scrollToTradeLensSection(
   elementId: string,
-  behavior: ScrollBehavior = "smooth"
+  behavior: ScrollBehavior = "smooth",
 ): void {
   const el = document.getElementById(elementId);
   if (!el) return;
@@ -323,7 +364,13 @@ function FadeUp({
 }
 
 // ─── Count-up number ──────────────────────────────────────────────────────────
-function CountUp({ target, duration = 2200 }: { target: number; duration?: number }) {
+function CountUp({
+  target,
+  duration = 2200,
+}: {
+  target: number;
+  duration?: number;
+}) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
@@ -345,14 +392,24 @@ function CountUp({ target, duration = 2200 }: { target: number; duration?: numbe
 }
 
 // ─── Apple App Store Badge ────────────────────────────────────────────────────
-function AppStoreBadge({ large = false, locale }: { large?: boolean; locale: Locale }) {
+function AppStoreBadge({
+  large = false,
+  locale,
+}: {
+  large?: boolean;
+  locale: Locale;
+}) {
   const t = T[locale].appStore;
   const lite = useTradeLensMotionLite();
   return (
     <motion.a
       href="https://apps.apple.com/app/id6753321240"
       aria-label="TradeLens im App Store herunterladen"
-      whileHover={lite ? undefined : { scale: 1.03, boxShadow: "0 0 28px rgba(59,130,246,0.45)" }}
+      whileHover={
+        lite
+          ? undefined
+          : { scale: 1.03, boxShadow: "0 0 28px rgba(59,130,246,0.45)" }
+      }
       whileTap={lite ? { scale: 0.98 } : { scale: 0.97 }}
       style={{
         display: "inline-flex",
@@ -368,14 +425,39 @@ function AppStoreBadge({ large = false, locale }: { large?: boolean; locale: Loc
         flexShrink: 0,
       }}
     >
-      <svg viewBox="0 0 24 24" width={large ? 26 : 21} height={large ? 32 : 26} fill="#000">
+      <svg
+        viewBox="0 0 24 24"
+        width={large ? 26 : 21}
+        height={large ? 32 : 26}
+        fill="#000"
+      >
         <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
       </svg>
-      <div style={{ display: "flex", flexDirection: "column", lineHeight: 1.15, alignItems: "flex-start" }}>
-        <span style={{ fontSize: large ? 11 : 10, fontWeight: 400, opacity: 0.65, letterSpacing: "0.05em" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          lineHeight: 1.15,
+          alignItems: "flex-start",
+        }}
+      >
+        <span
+          style={{
+            fontSize: large ? 11 : 10,
+            fontWeight: 400,
+            opacity: 0.65,
+            letterSpacing: "0.05em",
+          }}
+        >
           {t.line1}
         </span>
-        <span style={{ fontSize: large ? 21 : 18, fontWeight: 700, letterSpacing: "-0.025em" }}>
+        <span
+          style={{
+            fontSize: large ? 21 : 18,
+            fontWeight: 700,
+            letterSpacing: "-0.025em",
+          }}
+        >
           {t.line2}
         </span>
       </div>
@@ -404,72 +486,180 @@ function IconBox({ children }: { children: React.ReactNode }) {
 // ─── Inline SVG Icons ─────────────────────────────────────────────────────────
 const ICONS = {
   camera: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#3B82F6"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
       <circle cx="12" cy="13" r="3" />
     </svg>
   ),
   sparkles: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#3B82F6"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
       <path d="M5 3v4M19 17v4M3 5h4M17 19h4" />
     </svg>
   ),
   trendingUp: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#3B82F6"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
       <polyline points="16 7 22 7 22 13" />
     </svg>
   ),
   barChart: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#3B82F6"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <line x1="12" y1="20" x2="12" y2="10" />
       <line x1="18" y1="20" x2="18" y2="4" />
       <line x1="6" y1="20" x2="6" y2="16" />
     </svg>
   ),
   newspaper: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#3B82F6"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2" />
       <path d="M18 14h-8M15 18h-5M10 6h8v4h-8V6Z" />
     </svg>
   ),
   chat: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#3B82F6"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
     </svg>
   ),
   arrowUpDown: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#3B82F6"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <polyline points="17 11 12 6 7 11" />
       <polyline points="17 18 12 13 7 18" />
     </svg>
   ),
   globe: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#3B82F6"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <circle cx="12" cy="12" r="10" />
       <line x1="2" y1="12" x2="22" y2="12" />
       <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
     </svg>
   ),
   user: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#3B82F6"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
       <circle cx="12" cy="7" r="4" />
     </svg>
   ),
   boltMini: (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#60A5FA"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z" />
     </svg>
   ),
   sparkMini: (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#60A5FA"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="m12 3-1.7 5.2a2 2 0 0 1-1.3 1.3L3 12l5.2 1.7a2 2 0 0 1 1.3 1.3L12 21l1.7-5.2a2 2 0 0 1 1.3-1.3L21 12l-5.2-1.7a2 2 0 0 1-1.3-1.3L12 3Z" />
     </svg>
   ),
   orbitMini: (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#60A5FA"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <circle cx="12" cy="12" r="9" opacity="0.7" />
       <path d="M12 7v5l3 2" />
     </svg>
@@ -477,7 +667,14 @@ const ICONS = {
 };
 
 const STEP_ICONS = [ICONS.camera, ICONS.sparkles, ICONS.trendingUp];
-const FEATURE_ICONS = [ICONS.barChart, ICONS.newspaper, ICONS.chat, ICONS.arrowUpDown, ICONS.globe, ICONS.user];
+const FEATURE_ICONS = [
+  ICONS.barChart,
+  ICONS.newspaper,
+  ICONS.chat,
+  ICONS.arrowUpDown,
+  ICONS.globe,
+  ICONS.user,
+];
 
 // ─── NAVIGATION ───────────────────────────────────────────────────────────────
 function TLNav({ locale }: { locale: Locale }) {
@@ -488,7 +685,7 @@ function TLNav({ locale }: { locale: Locale }) {
 
   const handleInPageAnchor = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    sectionId: string
+    sectionId: string,
   ) => {
     e.preventDefault();
     const behavior: ScrollBehavior = prefersReducedMotion ? "auto" : "smooth";
@@ -510,7 +707,10 @@ function TLNav({ locale }: { locale: Locale }) {
         zIndex: 50,
         ...(lite
           ? {}
-          : { backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)" }),
+          : {
+              backdropFilter: "blur(20px)",
+              WebkitBackdropFilter: "blur(20px)",
+            }),
         background: lite
           ? scrolled
             ? "rgba(1,1,1,0.98)"
@@ -535,7 +735,12 @@ function TLNav({ locale }: { locale: Locale }) {
       >
         <Link
           href={`/${locale}/tradelens`}
-          style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none" }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+            textDecoration: "none",
+          }}
           aria-label={t.ariaHome}
         >
           <div
@@ -544,10 +749,16 @@ function TLNav({ locale }: { locale: Locale }) {
               height: 40,
               borderRadius: 10,
               overflow: "hidden",
-              boxShadow: "0 0 0 1px rgba(255,255,255,0.12), 0 4px 12px rgba(0,0,0,0.5)",
+              boxShadow:
+                "0 0 0 1px rgba(255,255,255,0.12), 0 4px 12px rgba(0,0,0,0.5)",
             }}
           >
-            <Image src="/tradelens.png" alt="TradeLens App Icon" width={40} height={40} />
+            <Image
+              src="/tradelens.png"
+              alt="TradeLens App Icon"
+              width={40}
+              height={40}
+            />
           </div>
           <span
             style={{
@@ -562,7 +773,10 @@ function TLNav({ locale }: { locale: Locale }) {
           </span>
         </Link>
 
-        <nav style={{ display: "flex", alignItems: "center", gap: 4 }} aria-label={t.ariaLabel}>
+        <nav
+          style={{ display: "flex", alignItems: "center", gap: 4 }}
+          aria-label={t.ariaLabel}
+        >
           <a
             href="#how-it-works"
             onClick={(e) => handleInPageAnchor(e, "how-it-works")}
@@ -623,7 +837,8 @@ function TLHero({ locale }: { locale: Locale }) {
               width: 240,
               height: 240,
               borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%)",
+              background:
+                "radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%)",
               pointerEvents: "none",
               zIndex: 0,
             }}
@@ -651,7 +866,12 @@ function TLHero({ locale }: { locale: Locale }) {
           />
           <motion.div
             animate={{ y: [0, 16, 0] }}
-            transition={{ duration: 9, ease: "easeInOut", repeat: Infinity, delay: 1.5 }}
+            transition={{
+              duration: 9,
+              ease: "easeInOut",
+              repeat: Infinity,
+              delay: 1.5,
+            }}
             style={{
               position: "absolute",
               top: "20%",
@@ -659,7 +879,8 @@ function TLHero({ locale }: { locale: Locale }) {
               width: 300,
               height: 300,
               borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%)",
+              background:
+                "radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%)",
               filter: "blur(40px)",
               pointerEvents: "none",
               zIndex: 0,
@@ -668,7 +889,14 @@ function TLHero({ locale }: { locale: Locale }) {
         </>
       )}
 
-      <div style={{ position: "relative", zIndex: 1, maxWidth: 820, margin: "0 auto" }}>
+      <div
+        style={{
+          position: "relative",
+          zIndex: 1,
+          maxWidth: 820,
+          margin: "0 auto",
+        }}
+      >
         {/* Hero rhythm: headline → sub → CTA → cards → note (consistent spacing) */}
         <div
           style={{
@@ -678,405 +906,652 @@ function TLHero({ locale }: { locale: Locale }) {
             gap: 0,
           }}
         >
-        <FadeUp>
-          <h1
-            style={{
-              fontSize: "clamp(36px, 6.5vw, 70px)",
-              fontWeight: 800,
-              letterSpacing: "-0.05em",
-              lineHeight: 1.02,
-              color: "#ffffff",
-              margin: "0 0 24px",
-            }}
-          >
-            {t.headlineL1}
-            <br />
-            {t.headlineL2}{" "}
-            <span style={{ color: "#3B82F6", position: "relative", display: "inline-block" }}>
-              {t.headlineAccent}
-            </span>
-          </h1>
-        </FadeUp>
-
-        <FadeUp delay={0.1}>
-          <p
-            style={{
-              fontSize: "clamp(16px, 2vw, 20px)",
-              fontWeight: 400,
-              lineHeight: 1.7,
-              color: "#b6b6b6",
-              maxWidth: 600,
-              margin: "0 0 44px",
-            }}
-          >
-            {t.sub}
-          </p>
-        </FadeUp>
-
-        <FadeUp delay={0.2}>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <div className="md:hidden">
-              <AppStoreBadge locale={locale} />
-            </div>
-            <div className="hidden md:block">
-              <AppStoreBadge large locale={locale} />
-            </div>
-          </div>
-        </FadeUp>
-
-        <div aria-hidden="true" style={{ height: 56 }} />
-
-        <FadeUp delay={0.3}>
-          {/* Mobile: touchable overlapping cards (angled peeks) */}
-          <div
-            className="md:hidden"
-            style={{
-              position: "relative",
-              height: 196,
-              width: "min(520px, 100%)",
-              margin: "0 auto",
-            }}
-          >
-            <div
-              aria-hidden="true"
+          <FadeUp>
+            <h1
               style={{
-                position: "absolute",
-                inset: -22,
-                background:
-                  "radial-gradient(ellipse at center, rgba(59,130,246,0.12) 0%, rgba(0,0,0,0) 62%)",
-                filter: "blur(12px)",
-                opacity: 0.7,
+                fontSize: "clamp(36px, 6.5vw, 70px)",
+                fontWeight: 800,
+                letterSpacing: "-0.05em",
+                lineHeight: 1.02,
+                color: "#ffffff",
+                margin: "0 0 24px",
               }}
-            />
-            <motion.div
-              drag="x"
-              dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={0.12}
-              onDragEnd={(_, info) => {
-                const swipe = info.offset.x + info.velocity.x * 0.15;
-                if (swipe > 60) setHeroCardIndex((v) => Math.max(0, v - 1));
-                if (swipe < -60) setHeroCardIndex((v) => Math.min(2, v + 1));
-              }}
-              style={{ position: "absolute", inset: 0, touchAction: "pan-y" }}
             >
-              {([0, 1, 2] as const).map((idx) => {
-                const isCenter = idx === heroCardIndex;
-                const isLeft = idx === heroCardIndex - 1;
-                const isRight = idx === heroCardIndex + 1;
+              {t.headlineL1}
+              <br />
+              {t.headlineL2}{" "}
+              <span
+                style={{
+                  color: "#3B82F6",
+                  position: "relative",
+                  display: "inline-block",
+                }}
+              >
+                {t.headlineAccent}
+              </span>
+            </h1>
+          </FadeUp>
 
-                const baseCardStyle: React.CSSProperties = {
+          <FadeUp delay={0.1}>
+            <p
+              style={{
+                fontSize: "clamp(16px, 2vw, 20px)",
+                fontWeight: 400,
+                lineHeight: 1.7,
+                color: "#b6b6b6",
+                maxWidth: 600,
+                margin: "0 0 44px",
+              }}
+            >
+              {t.sub}
+            </p>
+          </FadeUp>
+
+          <FadeUp delay={0.2}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <div className="md:hidden">
+                <AppStoreBadge locale={locale} />
+              </div>
+              <div className="hidden md:block">
+                <AppStoreBadge large locale={locale} />
+              </div>
+            </div>
+          </FadeUp>
+
+          <div aria-hidden="true" style={{ height: 56 }} />
+
+          <FadeUp delay={0.3}>
+            {/* Mobile: touchable overlapping cards (angled peeks) */}
+            <div
+              className="md:hidden"
+              style={{
+                position: "relative",
+                height: 196,
+                width: "min(520px, 100%)",
+                margin: "0 auto",
+              }}
+            >
+              <div
+                aria-hidden="true"
+                style={{
                   position: "absolute",
-                  top: 0,
-                  left: "50%",
-                  translate: "-50% 0",
+                  inset: -22,
+                  background:
+                    "radial-gradient(ellipse at center, rgba(59,130,246,0.12) 0%, rgba(0,0,0,0) 62%)",
+                  filter: "blur(12px)",
+                  opacity: 0.7,
+                }}
+              />
+              <motion.div
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.12}
+                onDragEnd={(_, info) => {
+                  const swipe = info.offset.x + info.velocity.x * 0.15;
+                  if (swipe > 60) setHeroCardIndex((v) => Math.max(0, v - 1));
+                  if (swipe < -60) setHeroCardIndex((v) => Math.min(2, v + 1));
+                }}
+                style={{ position: "absolute", inset: 0, touchAction: "pan-y" }}
+              >
+                {([0, 1, 2] as const).map((idx) => {
+                  const isCenter = idx === heroCardIndex;
+                  const isLeft = idx === heroCardIndex - 1;
+                  const isRight = idx === heroCardIndex + 1;
+
+                  const baseCardStyle: React.CSSProperties = {
+                    position: "absolute",
+                    top: 0,
+                    left: "50%",
+                    translate: "-50% 0",
+                    borderRadius: 20,
+                    textAlign: "left",
+                    boxShadow:
+                      "0 14px 54px rgba(0,0,0,0.72), inset 0 1px 0 rgba(255,255,255,0.07)",
+                    backdropFilter: lite ? undefined : "blur(12px)",
+                    WebkitBackdropFilter: lite ? undefined : "blur(12px)",
+                    width: 238,
+                    padding: "16px 16px",
+                    cursor: "pointer",
+                    userSelect: "none",
+                    WebkitUserSelect: "none",
+                  };
+
+                  const bgPrimary =
+                    "linear-gradient(180deg, rgba(59,130,246,0.14) 0%, rgba(59,130,246,0.06) 45%, rgba(0,0,0,0) 100%), rgba(12,12,12,0.72)";
+                  const bgSecondary =
+                    "linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 50%, rgba(0,0,0,0) 100%), rgba(19,19,19,0.72)";
+                  const bg = idx === 1 ? bgPrimary : bgSecondary;
+
+                  const animate = isCenter
+                    ? { x: 0, rotate: 0, scale: 1, opacity: 1, zIndex: 3 }
+                    : isLeft
+                      ? {
+                          x: -112,
+                          rotate: -8,
+                          scale: 0.92,
+                          opacity: 0.82,
+                          zIndex: 2,
+                        }
+                      : isRight
+                        ? {
+                            x: 112,
+                            rotate: 8,
+                            scale: 0.92,
+                            opacity: 0.82,
+                            zIndex: 2,
+                          }
+                        : {
+                            x: idx < heroCardIndex ? -180 : 180,
+                            rotate: idx < heroCardIndex ? -10 : 10,
+                            scale: 0.9,
+                            opacity: 0,
+                            zIndex: 1,
+                          };
+
+                  return (
+                    <motion.div
+                      key={idx}
+                      initial={false}
+                      animate={animate}
+                      transition={{
+                        type: "spring",
+                        stiffness: 260,
+                        damping: 26,
+                        mass: 0.9,
+                      }}
+                      style={{
+                        ...baseCardStyle,
+                        background: isCenter
+                          ? idx === 1
+                            ? bgPrimary.replace(
+                                "rgba(12,12,12,0.72)",
+                                "rgba(12,12,12,0.96)",
+                              )
+                            : bgSecondary.replace(
+                                "rgba(19,19,19,0.72)",
+                                "rgba(19,19,19,0.94)",
+                              )
+                          : bg,
+                      }}
+                      onClick={() => setHeroCardIndex(idx)}
+                      role="button"
+                      tabIndex={0}
+                      aria-label={`Hero card ${idx + 1}`}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ")
+                          setHeroCardIndex(idx);
+                        if (e.key === "ArrowLeft")
+                          setHeroCardIndex((v) => Math.max(0, v - 1));
+                        if (e.key === "ArrowRight")
+                          setHeroCardIndex((v) => Math.min(2, v + 1));
+                      }}
+                    >
+                      {idx === 0 ? (
+                        <>
+                          <div
+                            style={{
+                              width: 30,
+                              height: 30,
+                              borderRadius: 10,
+                              background: "rgba(34,197,94,0.12)",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              marginBottom: 10,
+                              boxShadow:
+                                "0 0 0 rgba(0,0,0,0), 0 0 18px rgba(34,197,94,0.12)",
+                            }}
+                          >
+                            <svg
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="#22C55E"
+                              strokeWidth="2.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                              <polyline points="16 7 22 7 22 13" />
+                            </svg>
+                          </div>
+                          <div
+                            style={{
+                              fontSize: 10,
+                              color: "#7f7f7f",
+                              letterSpacing: "0.06em",
+                              marginBottom: 6,
+                            }}
+                          >
+                            {t.trendLabel}
+                          </div>
+                          <div
+                            style={{
+                              fontSize: 20,
+                              fontWeight: 800,
+                              color: "#22C55E",
+                              letterSpacing: "-0.03em",
+                            }}
+                          >
+                            Long ↑
+                          </div>
+                          <div
+                            style={{
+                              fontSize: 10,
+                              color: "#7f7f7f",
+                              marginTop: 6,
+                            }}
+                          >
+                            {t.confidence}
+                          </div>
+                        </>
+                      ) : idx === 1 ? (
+                        <>
+                          <div
+                            style={{
+                              fontSize: 10,
+                              color: "#3B82F6",
+                              fontWeight: 700,
+                              letterSpacing: "0.08em",
+                              marginBottom: 10,
+                            }}
+                          >
+                            {t.aiLabel}
+                          </div>
+                          <div
+                            style={{
+                              fontSize: 13,
+                              fontWeight: 700,
+                              color: "#fff",
+                              marginBottom: 12,
+                            }}
+                          >
+                            BTC / USD
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              gap: 8,
+                            }}
+                          >
+                            {[
+                              {
+                                label: "Entry",
+                                value: "$43,200",
+                                color: "#ffffff",
+                              },
+                              {
+                                label: "Stop-Loss",
+                                value: "$41,800",
+                                color: "#ef4444",
+                              },
+                              {
+                                label: "Target",
+                                value: "$46,500",
+                                color: "#22C55E",
+                              },
+                            ].map(({ label, value, color }) => (
+                              <div
+                                key={label}
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "space-between",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <span
+                                  style={{ fontSize: 11, color: "#7f7f7f" }}
+                                >
+                                  {label}
+                                </span>
+                                <span
+                                  style={{
+                                    fontSize: 12,
+                                    fontWeight: 700,
+                                    color,
+                                  }}
+                                >
+                                  {value}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div
+                            style={{
+                              width: 30,
+                              height: 30,
+                              borderRadius: 10,
+                              background: "rgba(59,130,246,0.1)",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              marginBottom: 10,
+                              boxShadow:
+                                "0 0 0 rgba(0,0,0,0), 0 0 18px rgba(59,130,246,0.14)",
+                            }}
+                          >
+                            <svg
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="#3B82F6"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2" />
+                            </svg>
+                          </div>
+                          <div
+                            style={{
+                              fontSize: 10,
+                              color: "#7f7f7f",
+                              letterSpacing: "0.06em",
+                              marginBottom: 6,
+                            }}
+                          >
+                            {t.newsLabel}
+                          </div>
+                          <div
+                            style={{
+                              fontSize: 13,
+                              fontWeight: 700,
+                              color: "#fff",
+                              marginBottom: 10,
+                            }}
+                          >
+                            {t.sentiment}
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              gap: 4,
+                              flexWrap: "wrap",
+                            }}
+                          >
+                            {["Bullish", "+2.3%", "100+ News"].map((tag) => (
+                              <span
+                                key={tag}
+                                style={{
+                                  fontSize: 10,
+                                  fontWeight: 600,
+                                  padding: "3px 8px",
+                                  borderRadius: 100,
+                                  background: "rgba(59,130,246,0.1)",
+                                  color: "#60A5FA",
+                                }}
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </>
+                      )}
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+            </div>
+
+            {/* Desktop: simple aligned trio */}
+            <div className="hidden md:flex flex-wrap justify-center gap-4 mt-16 mb-10">
+              {/* Card 1: Signal */}
+              <motion.div
+                animate={lite ? false : { y: [0, -10, 0] }}
+                transition={
+                  lite
+                    ? undefined
+                    : { duration: 4.5, ease: "easeInOut", repeat: Infinity }
+                }
+                style={{
+                  background:
+                    "linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 50%, rgba(0,0,0,0) 100%), rgba(19,19,19,0.72)",
                   borderRadius: 20,
+                  padding: "20px 22px",
+                  width: 180,
                   textAlign: "left",
                   boxShadow:
-                    "0 14px 54px rgba(0,0,0,0.72), inset 0 1px 0 rgba(255,255,255,0.07)",
+                    "0 10px 38px rgba(0,0,0,0.62), inset 0 1px 0 rgba(255,255,255,0.06)",
+                  backdropFilter: lite ? undefined : "blur(10px)",
+                  WebkitBackdropFilter: lite ? undefined : "blur(10px)",
+                }}
+              >
+                <div
+                  style={{
+                    width: 34,
+                    height: 34,
+                    borderRadius: 10,
+                    background: "rgba(34,197,94,0.12)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginBottom: 12,
+                    boxShadow:
+                      "0 0 0 rgba(0,0,0,0), 0 0 18px rgba(34,197,94,0.12)",
+                  }}
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#22C55E"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                    <polyline points="16 7 22 7 22 13" />
+                  </svg>
+                </div>
+                <div
+                  style={{
+                    fontSize: 11,
+                    color: "#7f7f7f",
+                    letterSpacing: "0.05em",
+                    marginBottom: 6,
+                  }}
+                >
+                  {t.trendLabel}
+                </div>
+                <div
+                  style={{
+                    fontSize: 22,
+                    fontWeight: 800,
+                    color: "#22C55E",
+                    letterSpacing: "-0.03em",
+                  }}
+                >
+                  Long ↑
+                </div>
+                <div style={{ fontSize: 11, color: "#7f7f7f", marginTop: 6 }}>
+                  {t.confidence}
+                </div>
+              </motion.div>
+
+              {/* Card 2: Trading plan */}
+              <motion.div
+                animate={lite ? false : { y: [0, -14, 0] }}
+                transition={
+                  lite
+                    ? undefined
+                    : {
+                        duration: 5.5,
+                        ease: "easeInOut",
+                        repeat: Infinity,
+                        delay: 0.4,
+                      }
+                }
+                style={{
+                  background:
+                    "linear-gradient(180deg, rgba(59,130,246,0.14) 0%, rgba(59,130,246,0.06) 45%, rgba(0,0,0,0) 100%), rgba(12,12,12,0.72)",
+                  borderRadius: 20,
+                  padding: "22px 26px",
+                  width: 210,
+                  textAlign: "left",
+                  boxShadow:
+                    "0 14px 54px rgba(0,0,0,0.72), 0 0 44px rgba(59,130,246,0.10), inset 0 1px 0 rgba(255,255,255,0.07)",
                   backdropFilter: lite ? undefined : "blur(12px)",
                   WebkitBackdropFilter: lite ? undefined : "blur(12px)",
-                  width: 238,
-                  padding: "16px 16px",
-                  cursor: "pointer",
-                  userSelect: "none",
-                  WebkitUserSelect: "none",
-                };
-
-                const bgPrimary =
-                  "linear-gradient(180deg, rgba(59,130,246,0.14) 0%, rgba(59,130,246,0.06) 45%, rgba(0,0,0,0) 100%), rgba(12,12,12,0.72)";
-                const bgSecondary =
-                  "linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 50%, rgba(0,0,0,0) 100%), rgba(19,19,19,0.72)";
-                const bg = idx === 1 ? bgPrimary : bgSecondary;
-
-                const animate = isCenter
-                  ? { x: 0, rotate: 0, scale: 1, opacity: 1, zIndex: 3 }
-                  : isLeft
-                    ? { x: -112, rotate: -8, scale: 0.92, opacity: 0.82, zIndex: 2 }
-                    : isRight
-                      ? { x: 112, rotate: 8, scale: 0.92, opacity: 0.82, zIndex: 2 }
-                      : { x: idx < heroCardIndex ? -180 : 180, rotate: idx < heroCardIndex ? -10 : 10, scale: 0.9, opacity: 0, zIndex: 1 };
-
-                return (
-                  <motion.div
-                    key={idx}
-                    initial={false}
-                    animate={animate}
-                    transition={{ type: "spring", stiffness: 260, damping: 26, mass: 0.9 }}
-                    style={{
-                      ...baseCardStyle,
-                      background: isCenter
-                        ? (idx === 1
-                            ? bgPrimary.replace("rgba(12,12,12,0.72)", "rgba(12,12,12,0.96)")
-                            : bgSecondary.replace("rgba(19,19,19,0.72)", "rgba(19,19,19,0.94)"))
-                        : bg,
-                    }}
-                    onClick={() => setHeroCardIndex(idx)}
-                    role="button"
-                    tabIndex={0}
-                    aria-label={`Hero card ${idx + 1}`}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") setHeroCardIndex(idx);
-                      if (e.key === "ArrowLeft") setHeroCardIndex((v) => Math.max(0, v - 1));
-                      if (e.key === "ArrowRight") setHeroCardIndex((v) => Math.min(2, v + 1));
-                    }}
-                  >
-                    {idx === 0 ? (
-                      <>
-                        <div
-                          style={{
-                            width: 30,
-                            height: 30,
-                            borderRadius: 10,
-                            background: "rgba(34,197,94,0.12)",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            marginBottom: 10,
-                            boxShadow: "0 0 0 rgba(0,0,0,0), 0 0 18px rgba(34,197,94,0.12)",
-                          }}
-                        >
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
-                            <polyline points="16 7 22 7 22 13" />
-                          </svg>
-                        </div>
-                        <div style={{ fontSize: 10, color: "#7f7f7f", letterSpacing: "0.06em", marginBottom: 6 }}>
-                          {t.trendLabel}
-                        </div>
-                        <div style={{ fontSize: 20, fontWeight: 800, color: "#22C55E", letterSpacing: "-0.03em" }}>
-                          Long ↑
-                        </div>
-                        <div style={{ fontSize: 10, color: "#7f7f7f", marginTop: 6 }}>{t.confidence}</div>
-                      </>
-                    ) : idx === 1 ? (
-                      <>
-                        <div style={{ fontSize: 10, color: "#3B82F6", fontWeight: 700, letterSpacing: "0.08em", marginBottom: 10 }}>
-                          {t.aiLabel}
-                        </div>
-                        <div style={{ fontSize: 13, fontWeight: 700, color: "#fff", marginBottom: 12 }}>BTC / USD</div>
-                        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                          {[
-                            { label: "Entry", value: "$43,200", color: "#ffffff" },
-                            { label: "Stop-Loss", value: "$41,800", color: "#ef4444" },
-                            { label: "Target", value: "$46,500", color: "#22C55E" },
-                          ].map(({ label, value, color }) => (
-                            <div key={label} style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                              <span style={{ fontSize: 11, color: "#7f7f7f" }}>{label}</span>
-                              <span style={{ fontSize: 12, fontWeight: 700, color }}>{value}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <div
-                          style={{
-                            width: 30,
-                            height: 30,
-                            borderRadius: 10,
-                            background: "rgba(59,130,246,0.1)",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            marginBottom: 10,
-                            boxShadow: "0 0 0 rgba(0,0,0,0), 0 0 18px rgba(59,130,246,0.14)",
-                          }}
-                        >
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2" />
-                          </svg>
-                        </div>
-                        <div style={{ fontSize: 10, color: "#7f7f7f", letterSpacing: "0.06em", marginBottom: 6 }}>
-                          {t.newsLabel}
-                        </div>
-                        <div style={{ fontSize: 13, fontWeight: 700, color: "#fff", marginBottom: 10 }}>
-                          {t.sentiment}
-                        </div>
-                        <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
-                          {["Bullish", "+2.3%", "100+ News"].map((tag) => (
-                            <span
-                              key={tag}
-                              style={{
-                                fontSize: 10,
-                                fontWeight: 600,
-                                padding: "3px 8px",
-                                borderRadius: 100,
-                                background: "rgba(59,130,246,0.1)",
-                                color: "#60A5FA",
-                              }}
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </>
-                    )}
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-          </div>
-
-          {/* Desktop: simple aligned trio */}
-          <div className="hidden md:flex flex-wrap justify-center gap-4 mt-16 mb-10">
-            {/* Card 1: Signal */}
-            <motion.div
-              animate={lite ? false : { y: [0, -10, 0] }}
-              transition={
-                lite ? undefined : { duration: 4.5, ease: "easeInOut", repeat: Infinity }
-              }
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 50%, rgba(0,0,0,0) 100%), rgba(19,19,19,0.72)",
-                borderRadius: 20,
-                padding: "20px 22px",
-                width: 180,
-                textAlign: "left",
-                boxShadow:
-                  "0 10px 38px rgba(0,0,0,0.62), inset 0 1px 0 rgba(255,255,255,0.06)",
-                backdropFilter: lite ? undefined : "blur(10px)",
-                WebkitBackdropFilter: lite ? undefined : "blur(10px)",
-              }}
-            >
-              <div
-                style={{
-                  width: 34,
-                  height: 34,
-                  borderRadius: 10,
-                  background: "rgba(34,197,94,0.12)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: 12,
-                  boxShadow: "0 0 0 rgba(0,0,0,0), 0 0 18px rgba(34,197,94,0.12)",
                 }}
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
-                  <polyline points="16 7 22 7 22 13" />
-                </svg>
-              </div>
-              <div style={{ fontSize: 11, color: "#7f7f7f", letterSpacing: "0.05em", marginBottom: 6 }}>
-                {t.trendLabel}
-              </div>
-              <div style={{ fontSize: 22, fontWeight: 800, color: "#22C55E", letterSpacing: "-0.03em" }}>
-                Long ↑
-              </div>
-              <div style={{ fontSize: 11, color: "#7f7f7f", marginTop: 6 }}>{t.confidence}</div>
-            </motion.div>
+                <div
+                  style={{
+                    fontSize: 10,
+                    color: "#3B82F6",
+                    fontWeight: 700,
+                    letterSpacing: "0.08em",
+                    marginBottom: 10,
+                  }}
+                >
+                  {t.aiLabel}
+                </div>
+                <div
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 700,
+                    color: "#fff",
+                    marginBottom: 14,
+                  }}
+                >
+                  BTC / USD
+                </div>
+                <div
+                  style={{ display: "flex", flexDirection: "column", gap: 8 }}
+                >
+                  {[
+                    { label: "Entry", value: "$43,200", color: "#ffffff" },
+                    { label: "Stop-Loss", value: "$41,800", color: "#ef4444" },
+                    { label: "Target", value: "$46,500", color: "#22C55E" },
+                  ].map(({ label, value, color }) => (
+                    <div
+                      key={label}
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <span style={{ fontSize: 12, color: "#7f7f7f" }}>
+                        {label}
+                      </span>
+                      <span style={{ fontSize: 13, fontWeight: 700, color }}>
+                        {value}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
 
-            {/* Card 2: Trading plan */}
-            <motion.div
-              animate={lite ? false : { y: [0, -14, 0] }}
-              transition={
-                lite
-                  ? undefined
-                  : { duration: 5.5, ease: "easeInOut", repeat: Infinity, delay: 0.4 }
-              }
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(59,130,246,0.14) 0%, rgba(59,130,246,0.06) 45%, rgba(0,0,0,0) 100%), rgba(12,12,12,0.72)",
-                borderRadius: 20,
-                padding: "22px 26px",
-                width: 210,
-                textAlign: "left",
-                boxShadow:
-                  "0 14px 54px rgba(0,0,0,0.72), 0 0 44px rgba(59,130,246,0.10), inset 0 1px 0 rgba(255,255,255,0.07)",
-                backdropFilter: lite ? undefined : "blur(12px)",
-                WebkitBackdropFilter: lite ? undefined : "blur(12px)",
-              }}
-            >
-              <div style={{ fontSize: 10, color: "#3B82F6", fontWeight: 700, letterSpacing: "0.08em", marginBottom: 10 }}>
-                {t.aiLabel}
-              </div>
-              <div style={{ fontSize: 14, fontWeight: 700, color: "#fff", marginBottom: 14 }}>BTC / USD</div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                {[
-                  { label: "Entry", value: "$43,200", color: "#ffffff" },
-                  { label: "Stop-Loss", value: "$41,800", color: "#ef4444" },
-                  { label: "Target", value: "$46,500", color: "#22C55E" },
-                ].map(({ label, value, color }) => (
-                  <div key={label} style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <span style={{ fontSize: 12, color: "#7f7f7f" }}>{label}</span>
-                    <span style={{ fontSize: 13, fontWeight: 700, color }}>{value}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Card 3: News */}
-            <motion.div
-              animate={lite ? false : { y: [0, -9, 0] }}
-              transition={
-                lite ? undefined : { duration: 4, ease: "easeInOut", repeat: Infinity, delay: 0.8 }
-              }
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 50%, rgba(0,0,0,0) 100%), rgba(19,19,19,0.72)",
-                borderRadius: 20,
-                padding: "20px 22px",
-                width: 180,
-                textAlign: "left",
-                boxShadow:
-                  "0 10px 38px rgba(0,0,0,0.62), inset 0 1px 0 rgba(255,255,255,0.06)",
-                backdropFilter: lite ? undefined : "blur(10px)",
-                WebkitBackdropFilter: lite ? undefined : "blur(10px)",
-              }}
-            >
-              <div
+              {/* Card 3: News */}
+              <motion.div
+                animate={lite ? false : { y: [0, -9, 0] }}
+                transition={
+                  lite
+                    ? undefined
+                    : {
+                        duration: 4,
+                        ease: "easeInOut",
+                        repeat: Infinity,
+                        delay: 0.8,
+                      }
+                }
                 style={{
-                  width: 34,
-                  height: 34,
-                  borderRadius: 10,
-                  background: "rgba(59,130,246,0.1)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: 12,
-                  boxShadow: "0 0 0 rgba(0,0,0,0), 0 0 18px rgba(59,130,246,0.14)",
+                  background:
+                    "linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 50%, rgba(0,0,0,0) 100%), rgba(19,19,19,0.72)",
+                  borderRadius: 20,
+                  padding: "20px 22px",
+                  width: 180,
+                  textAlign: "left",
+                  boxShadow:
+                    "0 10px 38px rgba(0,0,0,0.62), inset 0 1px 0 rgba(255,255,255,0.06)",
+                  backdropFilter: lite ? undefined : "blur(10px)",
+                  WebkitBackdropFilter: lite ? undefined : "blur(10px)",
                 }}
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2" />
-                </svg>
-              </div>
-              <div style={{ fontSize: 11, color: "#7f7f7f", letterSpacing: "0.05em", marginBottom: 6 }}>
-                {t.newsLabel}
-              </div>
-              <div style={{ fontSize: 14, fontWeight: 700, color: "#fff", marginBottom: 10 }}>
-                {t.sentiment}
-              </div>
-              <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
-                {["Bullish", "+2.3%", "100+ News"].map((tag) => (
-                  <span
-                    key={tag}
-                    style={{
-                      fontSize: 10,
-                      fontWeight: 600,
-                      padding: "3px 8px",
-                      borderRadius: 100,
-                      background: "rgba(59,130,246,0.1)",
-                      color: "#60A5FA",
-                    }}
+                <div
+                  style={{
+                    width: 34,
+                    height: 34,
+                    borderRadius: 10,
+                    background: "rgba(59,130,246,0.1)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginBottom: 12,
+                    boxShadow:
+                      "0 0 0 rgba(0,0,0,0), 0 0 18px rgba(59,130,246,0.14)",
+                  }}
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#3B82F6"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-          <p
-            style={{
-              marginTop: 12,
-              fontSize: 11,
-              color: "rgba(182,182,182,0.72)",
-              letterSpacing: "0.01em",
-            }}
-          >
-            {t.exampleNote}
-          </p>
-        </FadeUp>
-
+                    <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2" />
+                  </svg>
+                </div>
+                <div
+                  style={{
+                    fontSize: 11,
+                    color: "#7f7f7f",
+                    letterSpacing: "0.05em",
+                    marginBottom: 6,
+                  }}
+                >
+                  {t.newsLabel}
+                </div>
+                <div
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 700,
+                    color: "#fff",
+                    marginBottom: 10,
+                  }}
+                >
+                  {t.sentiment}
+                </div>
+                <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
+                  {["Bullish", "+2.3%", "100+ News"].map((tag) => (
+                    <span
+                      key={tag}
+                      style={{
+                        fontSize: 10,
+                        fontWeight: 600,
+                        padding: "3px 8px",
+                        borderRadius: 100,
+                        background: "rgba(59,130,246,0.1)",
+                        color: "#60A5FA",
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+            <p
+              style={{
+                marginTop: 12,
+                fontSize: 11,
+                color: "rgba(182,182,182,0.72)",
+                letterSpacing: "0.01em",
+              }}
+            >
+              {t.exampleNote}
+            </p>
+          </FadeUp>
         </div>
       </div>
     </section>
@@ -1088,7 +1563,10 @@ function TLHowItWorks({ locale }: { locale: Locale }) {
   const t = T[locale].howItWorks;
 
   return (
-    <section id="how-it-works" style={{ padding: "100px 24px", background: "#010101" }}>
+    <section
+      id="how-it-works"
+      style={{ padding: "100px 24px", background: "#010101" }}
+    >
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         <FadeUp className="text-center mb-16">
           <span
@@ -1128,7 +1606,8 @@ function TLHowItWorks({ locale }: { locale: Locale }) {
                     gridTemplateColumns: "84px 1fr",
                     gap: 18,
                     alignItems: "start",
-                    padding: i === t.steps.length - 1 ? "10px 0" : "10px 0 36px",
+                    padding:
+                      i === t.steps.length - 1 ? "10px 0" : "10px 0 36px",
                   }}
                 >
                   {/* Left rail: step index + connector */}
@@ -1195,7 +1674,15 @@ function TLHowItWorks({ locale }: { locale: Locale }) {
                     >
                       {step.title}
                     </h3>
-                    <p style={{ fontSize: 15, lineHeight: 1.7, color: "#b6b6b6", margin: 0, maxWidth: 640 }}>
+                    <p
+                      style={{
+                        fontSize: 15,
+                        lineHeight: 1.7,
+                        color: "#b6b6b6",
+                        margin: 0,
+                        maxWidth: 640,
+                      }}
+                    >
                       {step.description}
                     </p>
                   </div>
@@ -1214,7 +1701,10 @@ function TLFeatures({ locale }: { locale: Locale }) {
   const t = T[locale].features;
 
   return (
-    <section id="features" style={{ padding: "100px 24px", background: "#0a0a0a" }}>
+    <section
+      id="features"
+      style={{ padding: "100px 24px", background: "#0a0a0a" }}
+    >
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         <FadeUp className="text-center mb-4">
           <span
@@ -1241,7 +1731,14 @@ function TLFeatures({ locale }: { locale: Locale }) {
           >
             {t.heading}
           </h2>
-          <p style={{ fontSize: 18, color: "#b6b6b6", maxWidth: 540, margin: "0 auto 60px" }}>
+          <p
+            style={{
+              fontSize: 18,
+              color: "#b6b6b6",
+              maxWidth: 540,
+              margin: "0 auto 60px",
+            }}
+          >
             {t.subtitle}
           </p>
         </FadeUp>
@@ -1269,7 +1766,8 @@ function TLFeatures({ locale }: { locale: Locale }) {
                         placeItems: "center",
                         background:
                           "radial-gradient(circle at 30% 30%, rgba(96,165,250,0.16), rgba(59,130,246,0.07) 55%, rgba(0,0,0,0) 72%)",
-                        boxShadow: "0 0 0 rgba(0,0,0,0), 0 0 26px rgba(59,130,246,0.10)",
+                        boxShadow:
+                          "0 0 0 rgba(0,0,0,0), 0 0 26px rgba(59,130,246,0.10)",
                       }}
                     >
                       {FEATURE_ICONS[i]}
@@ -1287,7 +1785,14 @@ function TLFeatures({ locale }: { locale: Locale }) {
                     >
                       {feat.title}
                     </h3>
-                    <p style={{ fontSize: 15, lineHeight: 1.7, color: "#b6b6b6", margin: 0 }}>
+                    <p
+                      style={{
+                        fontSize: 15,
+                        lineHeight: 1.7,
+                        color: "#b6b6b6",
+                        margin: 0,
+                      }}
+                    >
                       {feat.description}
                     </p>
                   </div>
@@ -1364,7 +1869,9 @@ function TLValueProps({ locale }: { locale: Locale }) {
                         flexShrink: 0,
                       }}
                     />
-                    <span style={{ color: "rgba(147,197,253,0.92)" }}>{vp.label}</span>
+                    <span style={{ color: "rgba(147,197,253,0.92)" }}>
+                      {vp.label}
+                    </span>
                   </div>
                   <p
                     style={{
@@ -1426,7 +1933,8 @@ function TLDownloadCTA({ locale }: { locale: Locale }) {
               width: 180,
               height: 180,
               borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%)",
+              background:
+                "radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%)",
               pointerEvents: "none",
             }}
           />
@@ -1458,7 +1966,8 @@ function TLDownloadCTA({ locale }: { locale: Locale }) {
               width: 200,
               height: 200,
               borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%)",
+              background:
+                "radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%)",
               filter: "blur(30px)",
               pointerEvents: "none",
             }}
@@ -1466,7 +1975,14 @@ function TLDownloadCTA({ locale }: { locale: Locale }) {
         </>
       )}
 
-      <div style={{ position: "relative", zIndex: 1, maxWidth: 700, margin: "0 auto" }}>
+      <div
+        style={{
+          position: "relative",
+          zIndex: 1,
+          maxWidth: 700,
+          margin: "0 auto",
+        }}
+      >
         <FadeUp>
           <div
             style={{
@@ -1542,18 +2058,52 @@ function TLFooter({ locale }: { locale: Locale }) {
     >
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-8">
-
           {/* 1. TradeLens brand */}
           <div>
-            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
-              <div style={{ width: 32, height: 32, borderRadius: 8, overflow: "hidden", boxShadow: "0 0 0 1px rgba(255,255,255,0.1)" }}>
-                <Image src="/tradelens.png" alt="TradeLens" width={32} height={32} />
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                marginBottom: 14,
+              }}
+            >
+              <div
+                style={{
+                  width: 32,
+                  height: 32,
+                  borderRadius: 8,
+                  overflow: "hidden",
+                  boxShadow: "0 0 0 1px rgba(255,255,255,0.1)",
+                }}
+              >
+                <Image
+                  src="/tradelens.png"
+                  alt="TradeLens"
+                  width={32}
+                  height={32}
+                />
               </div>
-              <span style={{ fontSize: 16, fontWeight: 800, color: "#fff", letterSpacing: "-0.03em" }}>
+              <span
+                style={{
+                  fontSize: 16,
+                  fontWeight: 800,
+                  color: "#fff",
+                  letterSpacing: "-0.03em",
+                }}
+              >
                 TradeLens
               </span>
             </div>
-            <p style={{ fontSize: 13, color: "#7f7f7f", lineHeight: 1.65, margin: 0, maxWidth: 200 }}>
+            <p
+              style={{
+                fontSize: 13,
+                color: "#7f7f7f",
+                lineHeight: 1.65,
+                margin: 0,
+                maxWidth: 200,
+              }}
+            >
               {t.tagline}
             </p>
           </div>
@@ -1593,16 +2143,23 @@ function TLFooter({ locale }: { locale: Locale }) {
                   transition: "background 0.2s",
                 }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.background = "rgba(59,130,246,0.1)";
+                  (e.currentTarget as HTMLElement).style.background =
+                    "rgba(59,130,246,0.1)";
                   (e.currentTarget as HTMLElement).style.boxShadow =
                     "0 10px 34px rgba(0,0,0,0.55), 0 0 22px rgba(59,130,246,0.16), inset 0 1px 0 rgba(255,255,255,0.06)";
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
+                  (e.currentTarget as HTMLElement).style.background =
+                    "rgba(255,255,255,0.05)";
                   (e.currentTarget as HTMLElement).style.boxShadow = "none";
                 }}
               >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
                   <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.77 1.52V6.77a4.85 4.85 0 0 1-1-.08z" />
                 </svg>
               </motion.a>
@@ -1626,19 +2183,36 @@ function TLFooter({ locale }: { locale: Locale }) {
                   transition: "background 0.2s",
                 }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.background = "rgba(59,130,246,0.1)";
+                  (e.currentTarget as HTMLElement).style.background =
+                    "rgba(59,130,246,0.1)";
                   (e.currentTarget as HTMLElement).style.boxShadow =
                     "0 10px 34px rgba(0,0,0,0.55), 0 0 22px rgba(59,130,246,0.16), inset 0 1px 0 rgba(255,255,255,0.06)";
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
+                  (e.currentTarget as HTMLElement).style.background =
+                    "rgba(255,255,255,0.05)";
                   (e.currentTarget as HTMLElement).style.boxShadow = "none";
                 }}
               >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
                   <circle cx="12" cy="12" r="4" />
-                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                  <circle
+                    cx="17.5"
+                    cy="6.5"
+                    r="1"
+                    fill="currentColor"
+                    stroke="none"
+                  />
                 </svg>
               </motion.a>
               <motion.a
@@ -1659,16 +2233,27 @@ function TLFooter({ locale }: { locale: Locale }) {
                   transition: "background 0.2s",
                 }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.background = "rgba(59,130,246,0.1)";
+                  (e.currentTarget as HTMLElement).style.background =
+                    "rgba(59,130,246,0.1)";
                   (e.currentTarget as HTMLElement).style.boxShadow =
                     "0 10px 34px rgba(0,0,0,0.55), 0 0 22px rgba(59,130,246,0.16), inset 0 1px 0 rgba(255,255,255,0.06)";
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
+                  (e.currentTarget as HTMLElement).style.background =
+                    "rgba(255,255,255,0.05)";
                   (e.currentTarget as HTMLElement).style.boxShadow = "none";
                 }}
               >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                   <polyline points="22,6 12,13 2,6" />
                 </svg>
@@ -1690,17 +2275,30 @@ function TLFooter({ locale }: { locale: Locale }) {
             >
               {t.legalHeading}
             </p>
-            <nav aria-label={t.ariaLegal} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            <nav
+              aria-label={t.ariaLegal}
+              style={{ display: "flex", flexDirection: "column", gap: 10 }}
+            >
               <Link
                 href={`/${locale}/tradelens/privacy-policy`}
-                style={{ fontSize: 14, color: "#b6b6b6", textDecoration: "none", transition: "color 0.2s" }}
+                style={{
+                  fontSize: 14,
+                  color: "#b6b6b6",
+                  textDecoration: "none",
+                  transition: "color 0.2s",
+                }}
                 className="hover:text-white"
               >
                 {t.privacyPolicy}
               </Link>
               <Link
                 href={`/${locale}/tradelens/terms-of-use`}
-                style={{ fontSize: 14, color: "#b6b6b6", textDecoration: "none", transition: "color 0.2s" }}
+                style={{
+                  fontSize: 14,
+                  color: "#b6b6b6",
+                  textDecoration: "none",
+                  transition: "color 0.2s",
+                }}
                 className="hover:text-white"
               >
                 {t.termsOfUse}
@@ -1724,7 +2322,12 @@ function TLFooter({ locale }: { locale: Locale }) {
             </p>
             <a
               href="mailto:help@citran.digital"
-              style={{ fontSize: 14, color: "#b6b6b6", textDecoration: "none", transition: "color 0.2s" }}
+              style={{
+                fontSize: 14,
+                color: "#b6b6b6",
+                textDecoration: "none",
+                transition: "color 0.2s",
+              }}
               className="hover:text-white"
             >
               help@citran.digital
@@ -1774,7 +2377,8 @@ export function TradeLensPage({ locale }: Props) {
     <TradeLensMotionLiteContext.Provider value={motionLite}>
       <div
         style={{
-          fontFamily: "var(--font-plus-jakarta, 'Plus Jakarta Sans', system-ui, sans-serif)",
+          fontFamily:
+            "var(--font-plus-jakarta, 'Plus Jakarta Sans', system-ui, sans-serif)",
           background: "#010101",
           color: "#ffffff",
           minHeight: "100vh",
