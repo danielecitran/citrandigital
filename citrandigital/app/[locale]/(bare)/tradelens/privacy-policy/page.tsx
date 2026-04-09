@@ -11,28 +11,28 @@ const UI = {
     meta: {
       title: "Datenschutzerklärung | TradeLens",
       description:
-        "Datenschutzerklärung der TradeLens iOS App von Citran Digital.",
+        "Datenschutzerklärung der TradeLens iOS App von Daniele Citran.",
     },
     breadcrumb: "Datenschutzerklärung",
     eyebrow: "Rechtliches",
     pageTitle: "Datenschutzerklärung",
-    provider: "Bereitgestellt von Citran Digital",
+    provider: "Bereitgestellt von Daniele Citran",
     date: "Stand: 21.03.2026",
     backLink: "← Zurück zu TradeLens",
-    copyright: (y: number) => `© ${y} Citran Digital. Alle Rechte vorbehalten.`,
+    copyright: (y: number) => `© ${y} Daniele Citran. Alle Rechte vorbehalten.`,
   },
   en: {
     meta: {
       title: "Privacy Policy | TradeLens",
-      description: "Privacy Policy of the TradeLens iOS App by Citran Digital.",
+      description: "Privacy Policy of the TradeLens iOS App by Daniele Citran.",
     },
     breadcrumb: "Privacy Policy",
     eyebrow: "Legal",
     pageTitle: "Privacy Policy",
-    provider: "Provided by Citran Digital",
+    provider: "Provided by Daniele Citran",
     date: "Last updated: March 21, 2026",
     backLink: "← Back to TradeLens",
-    copyright: (y: number) => `© ${y} Citran Digital. All rights reserved.`,
+    copyright: (y: number) => `© ${y} Daniele Citran. All rights reserved.`,
   },
 } as const;
 
@@ -454,7 +454,7 @@ function EnContent() {
         Protection (FADP) is:
         <AddressBlock
           lines={[
-            "Citran Digital",
+            "Daniele Citran",
             "Pfruendhofstrasse 54",
             "8910 Affoltern am Albis",
             "Switzerland",
