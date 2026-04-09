@@ -2124,7 +2124,7 @@ function TLFooter({ locale }: { locale: Locale }) {
             </p>
             <div style={{ display: "flex", gap: 12 }}>
               <motion.a
-                href="https://www.tiktok.com/@tradelens_de"
+                href="https://www.tiktok.com/@tradelensapp"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={t.ariaTikTok}
