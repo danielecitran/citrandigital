@@ -1993,7 +1993,7 @@ function TLDownloadCTA({ locale }: { locale: Locale }) {
               marginBottom: 20,
             }}
           >
-            {t.countPrefix} <CountUp target={10000} /> {t.countSuffix}
+            {t.countPrefix} <CountUp target={8000} /> {t.countSuffix}
           </div>
         </FadeUp>
 

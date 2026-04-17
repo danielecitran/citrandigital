@@ -17,7 +17,7 @@ const T = {
     eyebrow: "Rechtliches",
     pageTitle: "Allgemeine Geschäftsbedingungen",
     provider: "Bereitgestellt von Citran Digital",
-    date: "Stand: 21.03.2026",
+    date: "Stand: 17.04.2026",
     backLink: "← Zurück zu TradeLens",
     copyright: (y: number) => `© ${y} Citran Digital. Alle Rechte vorbehalten.`,
     privacyLink: "TradeLens Datenschutzerklärung →",
@@ -64,7 +64,7 @@ const T = {
       {
         heading: "10. Nutzungsbeschränkung",
         callout: { variant: "info" as const, badge: "Fair Use Policy" },
-        body: `Zur fairen Nutzung des Dienstes behalten wir uns vor, die Anzahl der monatlich durchführbaren Chartanalysen pro Nutzer auf maximal 100 Analysen zu beschränken. Bei Überschreitung dieser Grenze kann der Zugriff auf weitere Analysen bis auf Weiteres eingeschränkt werden.`,
+        body: `Zur fairen Nutzung des Dienstes behalten wir uns vor, die Anzahl der monatlich durchführbaren Chartanalysen pro Nutzer auf maximal 150 Analysen zu beschränken. Bei Überschreitung dieser Grenze kann der Zugriff auf weitere Analysen bis auf Weiteres eingeschränkt werden.`,
       },
       {
         heading: "11. Vertragsverletzungen und Sperrung",
@@ -99,7 +99,7 @@ const T = {
     eyebrow: "Legal",
     pageTitle: "Terms and Conditions",
     provider: "Provided by Citran Digital",
-    date: "Last updated: March 21, 2026",
+    date: "Last updated: April 17, 2026",
     backLink: "← Back to TradeLens",
     copyright: (y: number) => `© ${y} Citran Digital. All rights reserved.`,
     privacyLink: "TradeLens Privacy Policy →",
@@ -147,7 +147,7 @@ const T = {
       {
         heading: "10. Usage Restrictions",
         callout: { variant: "info" as const, badge: "Fair Use Policy" },
-        body: `To ensure fair use of the service, we reserve the right to limit the number of chart analyses a user may perform per month to a maximum of 100 analyses. If this limit is exceeded, access to further analyses may be temporarily restricted.`,
+        body: `To ensure fair use of the service, we reserve the right to limit the number of chart analyses a user may perform per month to a maximum of 150 analyses. If this limit is exceeded, access to further analyses may be temporarily restricted.`,
       },
       {
         heading: "11. Breach of Terms and Account Suspension",
